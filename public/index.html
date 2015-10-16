@@ -13,7 +13,7 @@
 	<base href="/">
 
 	<!--ICON-->
-	<link rel="icon" href="assets/favicon.png">
+	<link rel="icon" href="assets/favicon.ico">
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
@@ -37,44 +37,30 @@
 	<script src="js/services/UserService.js"></script>
 	<script src="js/controllers/ServiceCtrl.js"></script>
 	<script src="js/services/ServicesService.js"></script>
+	<script src="js/controllers/AboutCtrl.js"></script>
+	<script src="js/services/AboutService.js"></script>
 	<script src="js/appRoutes.js"></script>
 	<script src="js/app.js"></script>
 </head>
 <body>
-<div class="container">
-
-	<!--NAVIGATION-->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container-fluid">
-			<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target=".navbar-collapse">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">{{title}}</a>
 			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="navbar-collapse">
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/nerds">NERDS</a></li>
-					<li><a href="/geeks">GEEKS</a></li>
-					<li><a href="/users">USERS</a></li>
-					<li><a href="/services">SERVICES</a></li>
+					<li><a href="/home">Salon</a></li> <!--general info about salon-->
+					<li><a href="/services">Services</a></li> <!--schedules appointments from here and look at services-->
+					<li><a href="/about">About</a></li>  <!--location, info about hairstyles etc-->
 				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-	</nav>
-
-	<!-- //NAVIGATION END -->
-
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<div ng-view></div>
-
-</div>
+			</div>
+		</nav>
+		<!-- ANGULAR DYNAMIC CONTENT -->
+		<div ng-view></div>
+	</div>
 </body>
 </html>

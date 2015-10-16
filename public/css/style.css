@@ -1,1 +1,17 @@
 body { padding-top:30px; }
+
+/*navigation bar style*/
+
+.container .navbar .navbar-nav {
+     display: inline-block;
+     float: none;
+ }
+
+.container .navbar .navbar-nav li a:hover {
+    color: #007FBB;
+    font-size: 120%;
+}
+
+.navbar .navbar-collapse {
+    text-align: center;
+}

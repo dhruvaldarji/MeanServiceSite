@@ -25,6 +25,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: 'views/services.html',
 			controller: 'ServiceController'
 		})
+		.when('/about', {
+			templateUrl: 'views/about.html',
+			controller: 'AboutController'
+		})
 		.otherwise({redirectTo : '/'});
 
 	$locationProvider.html5Mode(true);
