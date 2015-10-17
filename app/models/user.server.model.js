@@ -20,14 +20,14 @@ var validateLocalStrategyProperty = function (property) {
  * A Validation function for local strategy password
  */
 var validateLocalStrategyPassword = function (password) {
-    return (this.provider !== 'local' || validator.isLength(password, 6));
+    return (this.provider !== 'local' || (password.length >= 6));
 };
 
 /**
  * A Validation function for local strategy email
  */
 var validateLocalStrategyEmail = function (email) {
-    return ((this.provider !== 'local' && !this.updated) || validator.isEmail(email));
+    return ((this.provider !== 'local' && !this.updated) || (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) );
 };
 
 /**
@@ -68,12 +68,9 @@ var UserSchema = new Schema({
         default: '',
         validate: [validateLocalStrategyPassword, 'Password should be longer']
     },
-    salt: {
-        type: String
-    },
     profileImageURL: {
         type: String,
-        default: 'modules/users/img/profile/default.png'
+        default: 'public/assets/favicon.png'
     },
     provider: {
         type: String,
@@ -89,7 +86,8 @@ var UserSchema = new Schema({
         default: ['user']
     },
     updated: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     created: {
         type: Date,
@@ -109,7 +107,6 @@ var UserSchema = new Schema({
  */
 UserSchema.pre('save', function (next) {
     if (this.password && this.isModified('password') && this.password.length > 6) {
-        this.salt = crypto.randomBytes(16).toString('base64');
         this.password = this.hashPassword(this.password);
     }
 
@@ -120,11 +117,7 @@ UserSchema.pre('save', function (next) {
  * Create instance method for hashing a password
  */
 UserSchema.methods.hashPassword = function (password) {
-    if (this.salt && password) {
-        return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
-    } else {
-        return password;
-    }
+    return password.toString('base64');
 };
 
 /**

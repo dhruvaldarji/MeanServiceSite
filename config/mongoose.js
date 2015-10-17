@@ -4,8 +4,8 @@ var config = require('./config'),
 module.exports = function() {
     var db = mongoose.connect(config.db);
 
-    //var userModel = require('../app/models/user.server.model');
-    //var serviceModel = require('../app/models/service.server.model');
+    require('../app/models/user.server.model');
+    require('../app/models/service.server.model');
 
     return db;
 };

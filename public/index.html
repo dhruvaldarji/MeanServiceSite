@@ -1,66 +1,74 @@
 <!doctype html>
 <html lang="en" ng-app="app" ng-controller="MainController">
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
 
-	<!-- Site Title -->
-	<title>{{title}}</title>
+    <!-- Site Title -->
+    <title>{{title}}</title>
 
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
-	<base href="/">
+    <base href="/">
 
-	<!--ICON-->
-	<link rel="icon" href="assets/favicon.ico">
+    <!--ICON-->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="libs/angular-bootstrap/ui-bootstrap-csp.css">
-	<link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom styles -->
 
-	<!-- JS -->
-	<script src="libs/angular/angular.min.js"></script>
-	<script src="libs/jquery/dist/jquery.min.js"></script>
-	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
-	<script src="libs/angular-route/angular-route.min.js"></script>
+    <!-- JS -->
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="libs/angular-route/angular-route.min.js"></script>
+    <script src="js/animation.js"></script>
 
-	<!-- ANGULAR CUSTOM -->
-	<script src="js/controllers/MainCtrl.js"></script>
-	<script src="js/controllers/NerdCtrl.js"></script>
-	<script src="js/services/NerdService.js"></script>
-	<script src="js/controllers/GeekCtrl.js"></script>
-	<script src="js/services/GeekService.js"></script>
-	<script src="js/controllers/UserCtrl.js"></script>
-	<script src="js/services/UserService.js"></script>
-	<script src="js/controllers/ServiceCtrl.js"></script>
-	<script src="js/services/ServicesService.js"></script>
-	<script src="js/controllers/AboutCtrl.js"></script>
-	<script src="js/services/AboutService.js"></script>
-	<script src="js/appRoutes.js"></script>
-	<script src="js/app.js"></script>
+    <!-- ANGULAR CUSTOM -->
+    <script src="js/controllers/MainCtrl.js"></script>
+    <script src="js/controllers/NerdCtrl.js"></script>
+    <script src="js/services/NerdService.js"></script>
+    <script src="js/controllers/GeekCtrl.js"></script>
+    <script src="js/services/GeekService.js"></script>
+    <script src="js/controllers/UserCtrl.js"></script>
+    <script src="js/services/UserService.js"></script>
+    <script src="js/controllers/ServiceCtrl.js"></script>
+    <script src="js/services/ServicesService.js"></script>
+    <script src="js/controllers/AboutCtrl.js"></script>
+    <script src="js/services/AboutService.js"></script>
+    <script src="js/appRoutes.js"></script>
+    <script src="js/app.js"></script>
 </head>
 <body>
-	<div class="container">
-		<nav class="navbar navbar-default" role="navigation">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse navbar-ex1-collapse">
-				<ul class="nav navbar-nav">
-					<li><a href="/home">Salon</a></li> <!--general info about salon-->
-					<li><a href="/services">Services</a></li> <!--schedules appointments from here and look at services-->
-					<li><a href="/about">About</a></li>  <!--location, info about hairstyles etc-->
-				</ul>
-			</div>
-		</nav>
-		<!-- ANGULAR DYNAMIC CONTENT -->
-		<div ng-view></div>
-	</div>
+<div class="container">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand visible-xs visible-sm" href="/home">{{titleShort}}</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/home">Home</a></li>
+                <!--General info about the Business.-->
+                <li><a href="/services">Services</a></li>
+                <!--Schedule appointments from here and look at Services.-->
+                <li><a href="/about">About</a></li>
+                <!--Location, Info about Business/Owner etc.-->
+            </ul>
+        </div>
+    </nav>
+    <!-- ANGULAR DYNAMIC CONTENT -->
+    <div ng-view></div>
+</div>
 </body>
 </html>

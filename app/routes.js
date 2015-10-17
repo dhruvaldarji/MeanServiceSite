@@ -4,6 +4,9 @@
 var User = require('./models/user.server.model.js');
 var Service = require('./models/service.server.model.js');
 
+var services = require('./controllers/services.server.controller.js');
+var users = require('./controllers/users.server.controller.js');
+
 module.exports = function (app) {
 
 // server routes ===========================================================
@@ -13,128 +16,37 @@ module.exports = function (app) {
     //GET API
     // test route to make sure everything is working
     // (accessed at GET http://localhost:3000/api)
-    app.get('/api', function (req, res) {
+    app.get('/api/', function (req, res) {
         res.json({message: 'Hooray! Welcome to our API!'});
     });
 
     //SERVICES CRUD ========================================================
 
-    // GET SERVICES
-    app.get('/api/services', function (req, res) {
-        // use mongoose to get all services in the database
-        Service.find(function (err, services) {
+    app.route('/api/services/')
+        .get(services.list)
+        .post(services.create);
 
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
+    app.route('/api/services/:serviceID/')
+        .get(services.read)
+        .put(services.update)
+        .delete(services.delete);
 
-            res.json(services); // return all services in JSON format
-        });
-    });
-
-    // POST Service
-    app.post('/api/services', function (req, res) {
-
-        var service = new Service();
-        service.name = req.body.name;
-        service.category = req.body.category;
-        service.price = req.body.price;
-        service.description = req.body.description;
-        service.duration = req.body.duration;
-
-        // save the bear and check for errors
-        service.save(function (err) {
-            if (err)
-                res.send(err);
-
-            res.json({message: 'Service Created!'});
-        });
-
-    });
-
-    // GET Service by _ID
-    app.get('/api/services/:service_id', function (req, res) {
-        // use mongoose to get specific services in the database
-        Service.findById(req.params.service_id, function(err, services) {
-
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
-
-            res.json(services); // return all services in JSON format
-        });
-    });
-
-    //UPDATE Service by _ID
-    app.put('/api/services/:service_id', function (req, res) {
-        // use mongoose to get specific services in the database
-        Service.findById(req.params.service_id, function(err, service) {
-
-            if (err)
-                res.send(err);
-
-            service.name = req.body.name;
-            service.category = req.body.category;
-            service.price = req.body.price;
-            service.description = req.body.description;
-            service.duration = req.body.duration;
-
-            // save the bear
-            service.save(function(err) {
-                if (err)
-                    res.send(err);
-
-                res.json({ message: 'Service Updated!' });
-            });
-        });
-    });
-
-    //UPDATE Service by _ID
-    app.delete('/api/services/:service_id', function (req, res) {
-        // use mongoose to get specific services in the database
-        Service.remove({_id: req.params.service_id
-        }, function(err, service) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'Successfully Deleted' });
-        });
-    });
+    app.param('serviceID', services.serviceByID);
 
     //==========================================================================
 
     // USER CRUD ===============================================================
 
-    // GET Users
-    app.get('/api/users', function (req, res) {
-        // use mongoose to get all users in the database
-        User.find(function (err, users) {
+    app.route('/api/users/')
+        .get(users.list)
+        .post(users.create);
 
-            // if there is an error retrieving, send the error.
-            // nothing after res.send(err) will execute
-            if (err)
-                res.send(err);
+    app.route('/api/users/:userID/')
+        .get(users.read)
+        .put(users.update)
+        .delete(users.delete);
 
-            res.json(users); // return all users in JSON format
-        });
-    });
-
-    // POST User
-    app.post('/api/users', function (req, res) {
-
-        var user = new User();
-        user.name = req.body.name;
-
-        user.save(function (err) {
-            if (err)
-                res.send(err);
-
-            res.json({message: 'User Created!'});
-        });
-
-    });
+    app.param('userID', users.userByID);
 
 
 
