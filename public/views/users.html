@@ -1,5 +1,39 @@
-<div class="jumbotron text-center">
-<h1>Users</h1>
+<!-- CONTACT SECTION START -->
+<section id="users" class="section">
+	<div class="container-fluid section-wrapper">
+		<div class="section-content">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h2 class="section-title uppercase">Users</h2>
+					<span class="divider center"></span>
+					<div class="row" ng-repeat="user in users">
+						<div class="col-md-4">
+							<p>Name: {{user.firstName}} {{user.lastName}}</p>
+							<p>E-mail: {{user.email}}</p>
+							<ul class="list-inline">
+								Roles:
+								<li ng-repeat="role in user.roles">{{role}}</li>
+							</ul>
+						</div>
+						<div class="col-md-4">
+							<!-- PROFILE PICTURE START -->
+							<div class="match-height pp-wrapper">
+								<div class="profile-picture style-two">
+									<img src="{{user.profileImageURL}}" alt="Profile Picture" class="img-responsive"/>
+								</div>
+							</div>
+							<!-- //PROFILE PICTURE END -->
+						</div>
+					</div>
 
-	<p>{{ tagline }}</p>
-</div>
+					<span class="divider center"></span>
+				</div>
+				<!-- //.col-md-12 -->
+			</div>
+			<!-- //.row -->
+		</div>
+		<!-- //.section-content -->
+	</div>
+	<!-- //.container -->
+</section>
+<!-- //CONTACT SECTION END -->

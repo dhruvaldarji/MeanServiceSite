@@ -1,24 +1,74 @@
-<div class="jumbotron text-center">
-<h1>Services</h1>
+<section id="services" class="service section">
+    <div class="container-fluid section-wrapper">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center animate-in" data-anim-type="fade-in-up">
+                    <h2 class="section-title uppercase">Services</h2>
 
-	<p>{{ tagline }}</p>
-</div>
+                    <p class="section-subtitle">{{tagline}}</p>
+                    <span class="divider center"></span>
+                </div>
+                <!-- //.col-md-8 -->
+            </div>
+            <!-- //.row -->
 
-<div ng-show="Cart.length>0">
-    <pre class="alert alert-info" role="alert" ng-show="Cart.length===1" >There is {{Cart.length}} item in the cart.</pre>
-    <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1" >There are {{Cart.length}} items in the cart.</pre>
-</div>
+            <div ng-show="Cart.length>0">
+                <pre class="alert alert-info" role="alert" ng-show="Cart.length===1">There is {{Cart.length}} item in the cart.</pre>
+                <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1">There are {{Cart.length}} items in the cart.</pre>
+            </div>
+            <!-- SERVICES LIST START -->
+            <div class="row services-list animate-in" data-anim-type="fade-in-up">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel-group service" id="service" ng-repeat="service in services">
+                        <div class="service-item">
+                            <div class="service-category">
+                                <span class="service-category">{{service.category}}</span>
+                            </div>
+                            <!-- //.service-category -->
 
-<br>
+                            <div class="service-btn">
+                                <a href="#{{service.id}}" data-toggle="collapse" data-parent="#service"></a>
+                            </div>
+                            <!-- //.service-btn -->
 
-<div id="services" class="row" ng-repeat="service in services">
-	<div class="col">
-		<p>Name : {{service.name}} </p>
-		<p>Category : {{service.category}} </p>
-		<p>Price : ${{service.price}} </p>
-		<p>Time : {{service.duration}} Hours </p>
-		<p>Description : <br>{{service.description}} </p>
-		<button type="button" class="btn btn-primary" ng-click="AddToCart(service.id)" title="Add To Cart">Add To Cart</button>
-		<hr>
-	</div>
-</div>
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <div class="panel-title">
+                                        <div class="list-group">
+                                            <ul class="list-inline">
+                                                <button type="button" class="btn btn-custom"
+                                                        ng-click="AddToCart(service.id)"
+                                                        title="Add To Cart">Add To Cart
+                                                </button>
+                                                <li>{{service.name}}:</li>
+                                                <li><strong>${{service.price}}</strong></li>
+                                            </ul>
+                                        </div>
+                                        <hr/>
+                                        <p ng-show="service.duration">Duration: {{service.duration}} Hours</p>
+
+                                        <p ng-show="service.description">Description: </p>
+                                    </div>
+                                    <!-- //.panel-title -->
+                                </div>
+                                <!-- //.panel-heading -->
+                                <div id="{{service.id}}" class="panel-collapse collapse in"
+                                     ng-show="service.description">
+                                    <div class="panel-body text-light-grey">
+                                        <p>
+                                            {{service.description}}
+                                        </p>
+                                    </div>
+                                    <!-- //.panel-body -->
+                                </div>
+                                <!-- //.panel-collapse -->
+                            </div>
+                            <!-- //.panel -->
+                        </div>
+                        <!-- //.service-item -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

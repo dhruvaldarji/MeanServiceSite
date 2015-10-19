@@ -1,6 +1,24 @@
-<div class="jumbotron text-center">
-	<h1>Home Page 4 Life</h1>
+<!-- HERO START -->
+<section id="home" class="hero">
+    <div class="pattern-overlay"></div>
+    <div class="hero-body">
+        <div class="hero-text text-center animate-in" data-anim-type="fade-in-up">
+            <h1>Welcome to {{site_data.title}}</h1>
+            <h1 class="small">By {{site_data.owner}}</h1>
+            <div id="text-slider" class="morphext" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div ng-if="site_data.short_descriptions" class="animated flipInX item active" ng-repeat="des in site_data.short_descriptions">
+                        <p>{{des}}</p>
+                    </div>
+                </div>
+                <!-- //.carousel-inner -->
+            </div>
+            <!-- //.carousel -->
 
-	<p>{{ tagline }}</p>
-
-</div>
+            <p>{{site_data.description}}</p>
+        </div>
+        <!-- //.hero-text -->
+    </div>
+    <!-- //.hero-body -->
+</section>
+<!-- //HERO END -->
