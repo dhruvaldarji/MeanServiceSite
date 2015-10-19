@@ -3,3 +3,22 @@
 
 	<p>{{ tagline }}</p>
 </div>
+
+<div ng-show="Cart.length>0">
+    <pre class="alert alert-info" role="alert" ng-show="Cart.length===1" >There is {{Cart.length}} item in the cart.</pre>
+    <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1" >There are {{Cart.length}} items in the cart.</pre>
+</div>
+
+<br>
+
+<div id="services" class="row" ng-repeat="service in services">
+	<div class="col">
+		<p>Name : {{service.name}} </p>
+		<p>Category : {{service.category}} </p>
+		<p>Price : ${{service.price}} </p>
+		<p>Time : {{service.duration}} Hours </p>
+		<p>Description : <br>{{service.description}} </p>
+		<button type="button" class="btn btn-primary" ng-click="AddToCart(service.id)" title="Add To Cart">Add To Cart</button>
+		<hr>
+	</div>
+</div>

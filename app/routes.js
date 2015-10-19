@@ -1,9 +1,12 @@
 // app/routes.js
 
-// grab the nerd model we just created
+var Data = require('./models/data.server.model.js');
+var Category = require('./models/category.server.model.js');
 var User = require('./models/user.server.model.js');
 var Service = require('./models/service.server.model.js');
 
+var site_data = require('./controllers/site_data.server.controller.js');
+var categories = require('./controllers/categories.server.controller.js');
 var services = require('./controllers/services.server.controller.js');
 var users = require('./controllers/users.server.controller.js');
 
@@ -19,6 +22,36 @@ module.exports = function (app) {
     app.get('/api/', function (req, res) {
         res.json({message: 'Hooray! Welcome to our API!'});
     });
+
+    //ABOUT CRUD ========================================================
+
+    app.route('/api/data/')
+        .get(site_data.list)
+        .post(site_data.create);
+
+    app.route('/api/data/:dataID/')
+        .get(site_data.read)
+        .put(site_data.update)
+        .delete(site_data.delete);
+
+    app.param('dataID', site_data.dataByID);
+
+    //==========================================================================
+
+    //CATEGORIES CRUD ========================================================
+
+    app.route('/api/categories/')
+        .get(categories.list)
+        .post(categories.create);
+
+    app.route('/api/categories/:categoryID/')
+        .get(categories.read)
+        .put(categories.update)
+        .delete(categories.delete);
+
+    app.param('categoryID', categories.categoryByID);
+
+    //==========================================================================
 
     //SERVICES CRUD ========================================================
 
@@ -52,7 +85,7 @@ module.exports = function (app) {
 
     // frontend routes =========================================================
     // route to handle all angular requests
-    app.get('.*', function (req, res) {
-        res.sendFile('public/views/index.html'); // load our public/index.html file
+    app.get("/*", function(req, res) {
+        res.sendFile("index.html", {"root": "public"});
     });
 };
