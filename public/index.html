@@ -23,41 +23,46 @@
     <link rel="stylesheet" href="libs/animate.css/animate.css">
     <link rel="stylesheet" href="css/style.css">
     <!-- custom styles -->
+
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+
 </head>
 <body>
 
 <!-- NAVIGATION START -->
-<nav id="navigation" class="navbar navbar-fixed-top center-menu" role="navigation">
-    <div class="container navbar-container">
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".custom-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<header>
+    <nav id="navigation" class="navbar navbar-fixed-top center-menu" role="navigation">
+        <div class="container navbar-container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".custom-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-            <a class="navbar-brand visible-xs visible-sm" href="#page-top">{{site_data.title_short}}</a>
-        </div>
-        <!-- //.navbar-header -->
+                <a class="navbar-brand visible-xs visible-sm" href="/home">{{site_data.title_short}}</a>
+            </div>
+            <!-- //.navbar-header -->
 
-        <div class="navbar-collapse collapse custom-collapse">
-            <a class="navbar-brand visible-md visible-lg" href="#page-top">{{site_data.title}}</a>
-            <ul class="nav navbar-nav">
-                <li class="page-scroll"><a href="/home">HOME</a></li>
-                <li class="page-scroll"><a href="/services">SERVICES</a></li>
-                <li class="page-scroll"><a href="/about">ABOUT</a></li>
-                <!-- TEMP USERS TAB-->
-                <li class="page-scroll"><a href="/users">USERS</a></li>
-            </ul>
+            <div class="navbar-collapse collapse custom-collapse">
+                <a class="navbar-brand visible-md visible-lg" href="/home">{{site_data.title}}</a>
+                <ul class="nav navbar-nav">
+                    <li class="page-scroll"><a href="/home">HOME</a></li>
+                    <li class="page-scroll"><a href="/services">SERVICES</a></li>
+                    <li class="page-scroll"><a href="/about">ABOUT</a></li>
+                    <!-- TEMP USERS TAB-->
+                    <li class="page-scroll"><a href="/users">USERS</a></li>
+                </ul>
+            </div>
+            <!-- //.navbar-collapse -->
         </div>
-        <!-- //.navbar-collapse -->
-    </div>
-</nav>
+    </nav>
+</header>
 <!--NAVIGATION END-->
 
 <!-- ANGULAR DYNAMIC CONTENT -->
-<div ng-view></div>
+<div ng-view id="view"></div>
 
 <!-- FOOTER START -->
 <footer class="footer">
@@ -70,12 +75,12 @@
                 <!-- //.page-scroll -->
 
                 <!--<ul  ng-if="site_data.social" class="list-inline social-icons" ng-repeat="s in site_data.social">-->
-                    <!--<li>-->
-                        <!--<div class="item">-->
-                            <!--<a href={{s.link}} target="_blank">{{s.social_type}}: {{s.name}}<i class="fa fa-youtube"></i></a>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; //.item &ndash;&gt;-->
-                    <!--</li>-->
+                <!--<li>-->
+                <!--<div class="item">-->
+                <!--<a href={{s.link}} target="_blank">{{s.social_type}}: {{s.name}}<i class="fa fa-youtube"></i></a>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; //.item &ndash;&gt;-->
+                <!--</li>-->
                 <!--</ul>-->
             </div>
             <!-- //.col-md-12 -->
@@ -101,21 +106,12 @@
 </footer>
 <!-- //FOOTER END -->
 
-</body>
 
 <!-- JS -->
 <script src="libs/angular/angular.min.js"></script>
-<script src="libs/jquery/dist/jquery.min.js"></script>
 <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
 <script src="libs/angular-route/angular-route.min.js"></script>
-
-<script src="libs/easing/jquery.easing.min.js"></script>
-<script src="libs/sticky/jquery.sticky.js"></script>
-<script src="libs/matchHeight/jquery.matchHeight-min.js"></script>
-
-<script src="js/main.js"></script>
-<script src="js/animation.js"></script>
 
 <!-- ANGULAR CUSTOM -->
 <script src="js/controllers/MainCtrl.js"></script>
@@ -133,5 +129,15 @@
 
 <script src="js/controllers/AboutCtrl.js"></script>
 <script src="js/services/AboutService.js"></script>
+
+<script src="libs/easing/jquery.easing.min.js"></script>
+<script src="libs/sticky/jquery.sticky.js"></script>
+<script src="libs/matchHeight/jquery.matchHeight-min.js"></script>
+
+<script src="js/main.js"></script>
+<script src="js/animation.js"></script>
+
+</body>
+
 
 </html>
