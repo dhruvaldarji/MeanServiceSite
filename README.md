@@ -37,4 +37,4 @@ Your Protractor test will send requests to this server to control a local browse
 Leave this server running throughout the tutorial.
 You can see information about the status of the server at http://localhost:4444/wd/hub.
 
-For More information reference Protractor here: [https://angular.github.io/protractor/#/]
+For More information reference Protractor [here](https://angular.github.io/protractor/#/)
