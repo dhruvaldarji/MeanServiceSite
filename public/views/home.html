@@ -3,8 +3,8 @@
     <div class="pattern-overlay"></div>
     <div class="hero-body">
         <div class="hero-text text-center animate-in" data-anim-type="fade-in-up">
-            <h1>Welcome to {{site_data.title}}</h1>
-            <h1 class="small">By {{site_data.owner}}</h1>
+            <h1 id="WelcomeHeader">Welcome to {{site_data.title}}</h1>
+            <h1 id="OwnerHeader" class="small">By {{site_data.owner}}</h1>
             <div id="text-slider" class="morphext" data-ride="carousel">
                 <div class="carousel-inner">
                     <div ng-if="site_data.short_descriptions" class="animated flipInX item active" ng-repeat="des in site_data.short_descriptions">

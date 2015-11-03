@@ -3,10 +3,11 @@
         <div class="section-content">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center animate-in" data-anim-type="fade-in-up">
-                    <h2 class="section-title uppercase">Services</h2>
+                    <h2 id="title" class="section-title uppercase">Services</h2>
 
                     <p class="section-subtitle">{{tagline}}</p>
                     <span class="divider center"></span>
+                    <button id="createServiceButton" type="button" class="btn btn-custom" ng-click="openNewServiceModal()">Add Service</button>
                 </div>
                 <!-- //.col-md-8 -->
             </div>
@@ -72,3 +73,51 @@
         </div>
     </div>
 </section>
+
+<div class="modal">
+    <script type="text/ng-template" id="createServiceModal.html">
+        <div class="modal-header heading modal-color">
+            <h3 class="modal-title modal-text">Create a New Service</h3>
+        </div>
+        <div class="modal-body modal-color" ng-show="stage == 0">
+            <div class="row form-group">
+                <div class="col col-md-offset-1 col-md-4">
+                    <label for="newServiceName">Service Name: </label>
+                    <input id="newServiceName" type="text" ng-model="newService.name"/><br/>
+                </div>
+                <div class="col col-md-offset-1 col-md-4">
+                    <label for="newServiceCategory">Service Category: </label>
+                    <input id="newServiceCategory" type="text" ng-model="newService.category"/><br/>
+                </div>
+                <div class="col col-md-offset-1 col-md-4">
+                    <label for="newServicePrice">Service Price: </label>
+                    <input id="newServicePrice" type="number" ng-model="newService.price"/><br/>
+                    </div>
+                <div class="col col-md-offset-1 col-md-4">
+                    <label for="newServiceDescription">Service Description: </label>
+                    <input id="newServiceDescription" type="text" ng-model="newService.description"/><br/>
+                    </div>
+                <div class="col col-md-offset-1 col-md-4">
+                    <label for="newServiceDuration">Service Duration: </label>
+                    <input id="newServiceDuration" type="number" ng-model="newService.duration"/><br/>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body modal-color" ng-show="stage == 1">
+            <div class="progress progress-striped active" data-keyboard="false">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+        </div>
+        <div class="modal-body modal-color" ng-show="stage == 2">
+            <label>Results:</label><br>
+            <p ng-bind="results"></p>
+        </div>
+        <div class="modal-footer">
+            <button id="CloseButton" class="btn btn-danger" type="button" ng-show="stage == 2" ng-click="cancel()">Close</button>
+            <button id="CreateAnotherServiceButton" class="btn btn-primary" type="button" ng-show="stage == 2" ng-click="stage = 0">Create New Service</button>
+
+            <button id="CancelButton" class="btn btn-danger" type="button" ng-show="stage == 0" ng-click="cancel()">Cancel</button>
+            <button id="SubmitButton" class="btn btn-primary" type="button" ng-show="stage == 0" ng-click="submitService()">Create Service</button>
+        </div>
+    </script>
+</div>
