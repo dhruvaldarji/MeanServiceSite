@@ -5,10 +5,8 @@ exports.config = {
 
     // Capabilities to be passed to the webdriver instance.
     // Use multicapabilities to test using multiple browsers
-    multiCapabilities: [
+    capabilities:
         {   browserName: 'chrome'   },
-        {   browserName: 'firefox'  }
-    ],
 
     // Spec patterns are relative to the configuration file location passed
     // to protractor (in this example conf.js).

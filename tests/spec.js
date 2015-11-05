@@ -1,6 +1,6 @@
 describe('MEAN Service Site', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
         // Load the AngularJS homepage.
         browser.get(' http://localhost:3000/');
 
@@ -35,13 +35,13 @@ describe('MEAN Service Site', function () {
     });
 
     //Test 5
-    it('Should create a new Service and return Success.', function () {
+    it('Should Create a new Service and return Success.', function () {
         element(by.id('ServicesLink')).click();
 
         element(by.id('createServiceButton')).click();
 
-        element(by.model('newService.name')).sendKeys("Test");
-        element(by.model('newService.category')).sendKeys("Test");
+        element(by.model('newService.name')).sendKeys("MyTestService");
+        element(by.model('newService.category')).sendKeys("000000000-TestCategory");
         element(by.model('newService.price')).sendKeys("1");
         element(by.model('newService.description')).sendKeys("Test");
         element(by.model('newService.duration')).sendKeys("1");
@@ -51,6 +51,61 @@ describe('MEAN Service Site', function () {
         browser.waitForAngular();
 
         expect(element(by.binding("results")).getText()).toEqual("Success");
+
+    });
+
+    //Test 6
+    it('Should Display a Service in a modal.', function () {
+        element(by.id('ServicesLink')).click();
+
+        var services = element.all(by.repeater('service in services')).get(0).element(by.id("serviceName")).click();
+
+        browser.waitForAngular();
+
+        expect(element(by.id("displayModalHeader")).getText()).toEqual("Display Service");
+        expect(element(by.binding("currentService.name")).getText()).toEqual("MyTestService");
+
+        element(by.id("displayCancelButton")).click();
+
+    });
+
+    //Test 7
+    it('Should Edit a Service and return Success.', function () {
+        element(by.id('ServicesLink')).click();
+
+        var services = element.all(by.repeater('service in services')).get(0).element(by.id("editServiceButton")).click();
+
+        expect(element(by.id("editModalHeader")).getText()).toEqual("Edit Service");
+
+        element(by.model('editService.description')).clear();
+        element(by.model('editService.description')).sendKeys("Edited Descriptions");
+
+        browser.sleep(5000);
+
+        element(by.id('editSubmitButton')).click();
+
+        browser.waitForAngular();
+
+        expect(element(by.binding("results")).getText()).toEqual("Success");
+
+    });
+
+    //Test 8
+    it('Should Delete a Service and return Success.', function () {
+        element(by.id('ServicesLink')).click();
+
+        var services = element.all(by.repeater('service in services')).get(0).element(by.id("deleteServiceButton")).click();
+
+        browser.waitForAngular();
+
+        expect(element(by.id("deleteModalHeader")).getText()).toEqual("Delete Service");
+
+        element(by.id('deleteSubmitButton')).click();
+
+        browser.waitForAngular();
+
+        expect(element(by.binding("results")).getText()).toEqual("Success");
+
 
     });
 
