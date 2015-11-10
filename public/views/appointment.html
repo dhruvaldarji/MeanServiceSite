@@ -1,0 +1,37 @@
+<!-- CONTACT SECTION START -->
+<section id="appointment" class="section">
+    <div class="container-fluid section-wrapper">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 id="title" class="section-title uppercase">Your Appointments</h2>
+                    <p class="section-subtitle">Want To Schedule an Appointment?</p>
+                    <span class="divider center"></span>
+                </div>
+                <!-- //.col-md-12 -->
+            </div>
+            <!-- //.row -->
+
+            <div class="row">
+                <div class="col-md-12 text-center" ng-hide="Cart.length > 0">
+                    <h2>No Appointments</h2>
+                    <p>Check out our Services to below to schedule an appointment.</p>
+                    <a href="/services" class=" btn btn-sm btn-custom">Services</a>
+
+                </div>
+                <div class="col-md-12" ng-show="Cart.length > 0" ng-repeat="service in Cart">
+                    <!-- APPOINTMENT DETAILS START -->
+                    <div>
+                        <h3>Item: {{service.category}} - {{service.name}}</h3>
+                    </div>
+                    <!-- //CONTACT DETAILS END -->
+                </div>
+                <!-- //.col-md-12 -->
+            </div>
+            <!-- //.row -->
+        </div>
+        <!-- //.section-content -->
+    </div>
+    <!-- //.container -->
+</section>
+<!-- //CONTACT SECTION END -->

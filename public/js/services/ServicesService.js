@@ -6,7 +6,12 @@ angular.module('ServicesService', []).factory('Service', ['$http', function($htt
             return $http.get('/api/services');
         },
 
-        // call to get all Services
+        // call to get all Services by category
+        getByCategory : function(id) {
+            return $http.get('/api/services/category/'+id);
+        },
+
+        // call to get Service by id.
         read : function(id) {
             return $http.get('/api/services/' + id);
         },

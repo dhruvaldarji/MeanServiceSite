@@ -15,6 +15,27 @@
             </div>
             <!-- //.carousel -->
             <p>{{site_data.description}}</p>
+
+            <!-- //.carousel -->
+            <div class="page-scroll">
+                <p>Follow me on Social Media!</p>
+
+                <div class="social">
+                    <a ng-show="site_data.social.youtube" href="http://www.youtube.com/{{site_data.social.youtube}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                            class="fa fa-youtube-play"></i></a>
+                    <a ng-show="site_data.social.instagram" href="http://www.instagram.com/{{site_data.social.instagram}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                            class="fa fa-instagram "></i></a>
+                    <a ng-show="site_data.social.pinterest" href="http://www.pinterest.com/{{site_data.social.pinterest}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                            class="fa fa-pinterest"></i></a>
+                    <a ng-show="site_data.social.twitter" href="http://www.twitter.com/{{site_data.social.twitter}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                            class="fa fa-twitter "></i></a>
+                </div>
+                <br>
+                <a href="/about" class=" btn btn-sm btn-custom">Who is {{site_data.owner}} Really?</a>
+                <br><br>
+                <br><br>
+            </div>
+            <!-- //.page-scroll -->
         </div>
         <!-- //.hero-text -->
     </div>

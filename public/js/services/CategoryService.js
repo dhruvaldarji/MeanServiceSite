@@ -6,6 +6,11 @@ angular.module('CategoryService', []).factory('Category', ['$http', function($ht
             return $http.get('/api/categories');
         },
 
+        // call to get Service by id.
+        read : function(id) {
+            return $http.get('/api/categories/' + id);
+        },
+
         // call to POST and create a new Category
         create : function(category) {
             return $http.post('/api/categories', category);

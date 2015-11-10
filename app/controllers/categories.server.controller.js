@@ -30,7 +30,7 @@ exports.create = function (req, res) {
     category.name = req.body.name;
     category.description = req.body.description;
 
-    // save the bear and check for errors
+    // save the category and check for errors
     category.save(function (err) {
         if (err) {
             return res.status(400).send({

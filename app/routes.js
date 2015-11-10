@@ -2,12 +2,14 @@
 
 var Data = require('./models/data.server.model.js');
 var Category = require('./models/category.server.model.js');
-var User = require('./models/user.server.model.js');
 var Service = require('./models/service.server.model.js');
+var Appointment = require('./models/appointment.server.model.js');
+var User = require('./models/user.server.model.js');
 
 var site_data = require('./controllers/site_data.server.controller.js');
 var categories = require('./controllers/categories.server.controller.js');
 var services = require('./controllers/services.server.controller.js');
+var appointments = require('./controllers/appointments.server.controller.js');
 var users = require('./controllers/users.server.controller.js');
 
 module.exports = function (app) {
@@ -64,7 +66,25 @@ module.exports = function (app) {
         .put(services.update)
         .delete(services.delete);
 
+    app.route('/api/services/category/:ID/')
+        .get(services.serviceByCategory);
+
     app.param('serviceID', services.serviceByID);
+
+    //==========================================================================
+
+    //APPOINTMENTS CRUD ========================================================
+
+    app.route('/api/appointments/')
+        .get(appointments.list)
+        .post(appointments.create);
+
+    app.route('/api/appointments/:apptID/')
+        .get(appointments.read)
+        .put(appointments.update)
+        .delete(appointments.delete);
+
+    app.param('apptID', appointments.apptByCategory);
 
     //==========================================================================
 

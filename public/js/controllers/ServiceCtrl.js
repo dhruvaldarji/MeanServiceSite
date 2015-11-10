@@ -1,8 +1,55 @@
-angular.module('ServiceCtrl', []).controller('ServiceController', function ($scope, Service, $uibModal, $log) {
+angular.module('ServiceCtrl', []).controller('ServiceController', function ($scope, Service, Category, Appointment, $uibModal, $log) {
 
     $scope.tagline = 'These are the Services!';
 
     $scope.services = [];
+
+    $scope.Cart = Appointment.localCart();
+
+    $scope.getCategories = function () {
+        Category.get()
+            .then(function successCallback(response) {
+                // this callback will be called asynchronously
+                // when the response is available
+                $scope.results = "Success";
+                $scope.response = response;
+                $scope.categories = response.data;
+
+                //console.log("Results: ", $scope.results);
+
+                angular.forEach($scope.categories, function (category) {
+                    //console.log("Category: ", category);
+                    Service.getByCategory(category._id)
+                        .then(function successCallback(response) {
+                            // this callback will be called asynchronously
+                            // when the response is available
+                            $scope.results = "Success";
+                            $scope.response = response;
+
+                            category.services = response.data;
+                            //console.log(category);
+                            //console.log("Results: ", $scope.results);
+
+                        }, function errorCallback(response) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                            $scope.results = "Failure";
+                            $scope.response = response;
+                            $scope.categories[index].services = [];
+                        });
+                });
+
+
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                $scope.results = "Failure";
+                $scope.response = response;
+                $scope.categories = [];
+            });
+    };
+
+    $scope.getCategories();
 
     $scope.getServices = function () {
         Service.get()
@@ -25,30 +72,18 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
             });
     };
 
-    $scope.getServices();
-
-    $scope.Cart = [];
-
-    $scope.alerts = [
-        {type: 'danger', msg: 'Oh snap! Change a few things up and try submitting again.'},
-        {type: 'success', msg: 'Well done! You successfully read this important alert message.'}
-    ];
-
-    $scope.addAlert = function () {
-        $scope.alerts.push({msg: 'Another alert!'});
-    };
-
-    $scope.closeAlert = function (index) {
-        $scope.alerts.splice(index, 1);
-    };
-
     $scope.AddToCart = function (serviceID) {
-        if ($scope.Cart == null) {
-            $scope.Cart = [serviceID];
-        }
-        else {
+        //If service is not already in the Cart, then add.
+        //console.log("Cart Before: ", $scope.Cart);
+        //console.log("Index of val=serviceID: "+serviceID+" = ", $scope.Cart.indexOf(serviceID));
+
+        if($scope.Cart.indexOf(serviceID) < 0){
             $scope.Cart.push(serviceID);
         }
+        else {
+            window.alert("This item is already in the cart.")
+        }
+        //console.log("Cart After: ", $scope.Cart);
     };
 
     $scope.openNewServiceModal = function () {
@@ -68,7 +103,7 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
             $scope.newService = newService;
         }, function () {
             //$log.info('Create Modal dismissed at: ' + new Date());
-            $scope.getServices();
+            $scope.getCategories();
         });
     };
 
@@ -102,7 +137,7 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
                 editServiceID: function () {
                     return id;
                 },
-                editService: function(){
+                editService: function () {
                     return $scope.editService;
                 }
             }
@@ -112,7 +147,7 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
             $scope.editService = editService;
         }, function () {
             //$log.info('Edit Modal dismissed at: ' + new Date());
-            $scope.getServices();
+            $scope.getCategories();
         });
     };
 
@@ -126,7 +161,7 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
                 deleteServiceID: function () {
                     return id;
                 },
-                deleteService: function(){
+                deleteService: function () {
                     return $scope.deleteService;
                 }
             }
@@ -136,13 +171,13 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
             $scope.deleteService = deleteService;
         }, function () {
             //$log.info('Delete Modal dismissed at: ' + new Date());
-            $scope.getServices();
+            $scope.getCategories();
         });
     };
 
 });
 
-angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, $uibModalInstance, Service) {
+angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, $uibModalInstance, Category, Service) {
 
     $scope.newService = {
         name: null,
@@ -152,11 +187,27 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
         duration: null
     };
 
+    Category.get()
+        .then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            $scope.results = "Success";
+            $scope.response = response;
+            $scope.categories = response.data;
+            $scope.newService.category = $scope.categories[0];
+
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.results = "Failure";
+            $scope.response = response;
+            $scope.newCats = [];
+        });
+
     $scope.stage = 0; // Entering information
 
     $scope.submitService = function () {
         $scope.stage = 1; // Processing
-
         Service.create($scope.newService)
             .then(function successCallback(response) {
                 // this callback will be called asynchronously
@@ -215,7 +266,7 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
     };
 });
 
-angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $uibModalInstance, Service, editServiceID) {
+angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $uibModalInstance, Service, Category, editServiceID) {
 
     $scope.stage = 1; // Entering information
 
@@ -223,10 +274,13 @@ angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $u
         .then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
+            $scope.editService = response.data;
+
             $scope.results = "Success";
             $scope.response = response;
-            $scope.editService = response.data;
             $scope.stage = 0; // Display Results
+
+
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -242,6 +296,33 @@ angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $u
 
             $scope.stage = 0; // Display Results
 
+        });
+
+    var findCategory = function (list, id) {
+        for (var cat in list) {
+            if (list[cat]._id = id) {
+                return cat;
+            }
+        }
+    };
+
+    Category.get()
+        .then(function successCallback(response) {
+            // this callback will be called asynchronously
+            // when the response is available
+            $scope.results = "Success";
+            $scope.response = response;
+            $scope.categories = response.data;
+            var temp = $scope.editService.category;
+            var index = findCategory($scope.categories, temp);
+            $scope.editService.category = $scope.categories[index];
+
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.results = "Failure";
+            $scope.response = response;
+            $scope.newCats = [];
         });
 
     $scope.submitEditService = function () {

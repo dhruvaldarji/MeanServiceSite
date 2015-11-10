@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Service = mongoose.model('Service');
 
-var getErrorMessage = function(err) {
+var getErrorMessage = function (err) {
     if (err.errors) {
         for (var errName in err.errors) {
             if (err.errors[errName].message) return err.errors[errName].message;
@@ -33,7 +33,7 @@ exports.create = function (req, res) {
     service.description = req.body.description;
     service.duration = req.body.duration;
 
-    // save the bear and check for errors
+    // save the service and check for errors
     service.save(function (err) {
         if (err) {
             return res.status(400).send({
@@ -49,8 +49,8 @@ exports.create = function (req, res) {
 
 };
 
-exports.serviceByID = function(req, res, next, id) {
-    Service.findById(id).exec(function(err, service) {
+exports.serviceByID = function (req, res, next, id) {
+    Service.findById(id).exec(function (err, service) {
         if (err) return next(err);
         if (!service) return next(new Error('Failed to load Service with ID:s ' + id));
 
@@ -59,13 +59,27 @@ exports.serviceByID = function(req, res, next, id) {
     });
 };
 
+exports.serviceByCategory = function (req, res) {
+    var id = req.params.ID;
+    // use mongoose to get all services in the database
+    Service.find({'category': id }).sort('name').exec(function (err, services) {
+        if (err) {
+            return res.status(400).send({
+                message: getErrorMessage(err)
+            });
+        }
+        // return all services in JSON format
+        res.json(services);
+    });
+};
+
 // READ Service
-exports.read = function(req, res) {
+exports.read = function (req, res) {
     res.json(req.service);
 };
 
 // UPDATE Service by _ID
-exports.update = function(req, res) {
+exports.update = function (req, res) {
     var service = req.service;
 
     service.name = req.body.name;
@@ -74,7 +88,7 @@ exports.update = function(req, res) {
     service.description = req.body.description;
     service.duration = req.body.duration;
 
-    service.save(function(err) {
+    service.save(function (err) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -89,10 +103,10 @@ exports.update = function(req, res) {
 };
 
 // DELETE Service by _ID
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
     var service = req.service;
 
-    service.remove(function(err) {
+    service.remove(function (err) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)

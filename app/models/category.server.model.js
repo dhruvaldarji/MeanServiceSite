@@ -5,8 +5,9 @@ var Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
 	"id" : { type : Schema.ObjectId, default : Schema.ObjectId	},
-	"name" : {type : String, default: 'Category_Name', required: true	},
-	"description": {type: String, default: 'Category_Description', required: true	}
+	"name" : {type : String, required: true	},
+	"description": {type: String, required: true	},
+	"services": {type: Array }
 });
 
 // define our services model

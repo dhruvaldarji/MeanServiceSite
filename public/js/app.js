@@ -9,6 +9,8 @@ angular.module('app',
         'ServicesService',
         'CategoryCtrl',
         'CategoryService',
+        'AppointmentCtrl',
+        'AppointmentService',
         'AboutCtrl',
         'AboutService'
     ]);

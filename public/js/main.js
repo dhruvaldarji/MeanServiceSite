@@ -164,28 +164,28 @@ $(function () {
     });
 
 
-    /*-------------------------------------------------------------------*/
-    /*  16. Gravity Easter Egg!
-     /*-------------------------------------------------------------------*/
-
-    document.getElementById('gravity_element').onclick = function () {
-        var script = document.createElement("script");
-        script.src = "http://gravityscript.googlecode.com/svn/trunk/gravityscript.js";
-        document.body.appendChild(script);
-        void(0);
-    };
-
-    /*-------------------------------------------------------------------*/
-    /*  17. Kickass Easter Egg!
-     /*-------------------------------------------------------------------*/
-
-    document.getElementById('kickass_element').onclick = function () {
-        var KICKASSVERSION = '2.0';
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        document.body.appendChild(s);
-        s.src = '//hi.kickassapp.com/kickass.js';
-        void(0);
-    };
+    ///*-------------------------------------------------------------------*/
+    ///*  16. Gravity Easter Egg!
+    // /*-------------------------------------------------------------------*/
+    //
+    //document.getElementById('gravity_element').onclick = function () {
+    //    var script = document.createElement("script");
+    //    script.src = "http://gravityscript.googlecode.com/svn/trunk/gravityscript.js";
+    //    document.body.appendChild(script);
+    //    void(0);
+    //};
+    //
+    ///*-------------------------------------------------------------------*/
+    ///*  17. Kickass Easter Egg!
+    // /*-------------------------------------------------------------------*/
+    //
+    //document.getElementById('kickass_element').onclick = function () {
+    //    var KICKASSVERSION = '2.0';
+    //    var s = document.createElement('script');
+    //    s.type = 'text/javascript';
+    //    document.body.appendChild(s);
+    //    s.src = '//hi.kickassapp.com/kickass.js';
+    //    void(0);
+    //};
 
 });

@@ -17,25 +17,26 @@
                 <pre class="alert alert-info" role="alert" ng-show="Cart.length===1">There is {{Cart.length}} item in the cart.</pre>
                 <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1">There are {{Cart.length}} items in the cart.</pre>
             </div>
-            <!-- SERVICES LIST START -->
+
+            <!-- CATEGORIES LIST START -->
             <div class="row services-list animate-in" data-anim-type="fade-in-up">
                 <div class="col-md-10 col-md-offset-1">
-                    <div class="panel-group service" id="service" ng-repeat="service in services">
+                    <div class="panel-group service" id="category" ng-repeat="category in categories">
                         <div class="service-item">
                             <div class="service-category">
-                                <span class="service-category">{{service.category}}</span>
+                                <span class="service-category">{{category.name}}</span>
                             </div>
                             <!-- //.service-category -->
 
                             <div class="service-btn">
-                                <a href="#{{service._id}}" data-toggle="collapse" data-parent="#service"></a>
+                                <a href="#{{category._id}}" data-toggle="collapse" data-parent="#category"></a>
                             </div>
                             <!-- //.service-btn -->
 
                             <div class="panel">
                                 <div class="panel-heading">
                                     <div class="panel-title">
-                                        <div class="list-group">
+                                        <div class="list-group" ng-repeat="service in category.services">
                                             <ul class="list-inline">
                                                 <button type="button" class="btn btn-custom"
                                                         ng-click="AddToCart(service._id)"
@@ -49,18 +50,16 @@
                                             </ul>
                                         </div>
                                         <hr/>
-                                        <p ng-show="service.duration">Duration: {{service.duration}} Hours</p>
-
-                                        <p ng-show="service.description">Description: </p>
+                                        <p ng-show="category.description">Description: </p>
                                     </div>
                                     <!-- //.panel-title -->
                                 </div>
                                 <!-- //.panel-heading -->
-                                <div id="{{service._id}}" class="panel-collapse collapse in"
-                                     ng-show="service.description">
+                                <div id="{{category._id}}" class="panel-collapse collapse in"
+                                     ng-show="category.description">
                                     <div class="panel-body text-light-grey">
                                         <p>
-                                            {{service.description}}
+                                            {{category.description}}
                                         </p>
                                     </div>
                                     <!-- //.panel-body -->
@@ -82,7 +81,7 @@
         <div class="modal-header heading modal-color">
             <h3 class="modal-title modal-text">Create a New Service</h3>
         </div>
-        <div class="modal-body modal-color" ng-show="stage == 0">
+        <div class="modal-body modal-color" ng-show="stage === 0">
             <div class="row form-group">
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="newServiceName">Service Name: </label>
@@ -90,7 +89,10 @@
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="newServiceCategory">Service Category: </label>
-                    <input id="newServiceCategory" type="text" ng-model="newService.category"/><br/>
+                    <!--<input id="newServiceCategory" type="text" ng-model="newService.category"/>-->
+                    <select name="categorySelect" id="newServiceCategory" ng-model="newService.category"
+                            ng-options="category.name for category in categories track by category._id">
+                    </select><br>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="newServicePrice">Service Price: </label>
@@ -106,7 +108,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal-body modal-color" ng-show="stage == 1">
+        <div class="modal-body modal-color" ng-show="stage === 1">
             <div class="progress progress-striped active" data-keyboard="false">
                 <div class="bar" style="width: 100%;"></div>
             </div>
@@ -178,7 +180,10 @@
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="editServiceCategory">Service Category: </label>
-                    <input id="editServiceCategory" type="text" ng-model="editService.category"/><br/>
+                    <!--<input id="editServiceCategory" type="text" ng-model="editService.category"/>-->
+                    <select name="categorySelect" id="editServiceCategory" ng-model="editService.category"
+                            ng-options="category.name for category in categories track by category._id">
+                    </select><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="editServicePrice">Service Price: </label>
@@ -239,6 +244,10 @@
                     <label for="deleteServiceDuration">Service Duration: </label>
                     <p id="deleteServiceDuration" ng-bind="deleteService.duration"></p><br/>
                 </div>
+                <div class="col col-md-offset-1 col-md-4">
+                    <p>Are you sure you want to delete?</p>
+                </div>
+
             </div>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 1">

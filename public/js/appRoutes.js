@@ -15,6 +15,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             templateUrl: 'views/services.html',
             controller: 'ServiceController'
         })
+        .when('/appointments/', {
+            templateUrl: 'views/appointment.html',
+            controller: 'AppointmentController'
+        })
+        .when('/appointments/:apptID', {
+            templateUrl: 'views/appointment.html',
+            controller: 'AppointmentController',
+        })
         .when('/about', {
             templateUrl: 'views/about.html',
             controller: 'AboutController'
