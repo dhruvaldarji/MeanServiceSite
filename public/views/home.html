@@ -1,37 +1,80 @@
-<!-- HERO START -->
-<section id="home" class="hero">
-    <div class="pattern-overlay"></div>
-    <div class="hero-body">
-        <div class="hero-text text-center animate-in" data-anim-type="fade-in-up">
+<section id="home" ng-init="twitterButtons()">
+    <div>
+        <div class="text-center">
             <h1 id="WelcomeHeader">Welcome to {{site_data.title}}</h1>
-            <h1 id="OwnerHeader" class="small">By {{site_data.owner}}</h1>
-            <div id="text-slider" class="morphext" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div ng-if="site_data.short_descriptions" class="animated flipInX item active" ng-repeat="des in site_data.short_descriptions">
-                        <p>{{des}}</p>
+
+            <h3 id="OwnerHeader" >By {{site_data.owner}}</h3>
+
+            <br>
+
+            <!--Descriptions-->
+            <div class="row container-fluid">
+                <!--Main Description-->
+                <div class="col-md-offset-2 col-md-4 col-sm-12 col-xs-12">
+                    <div id="main_description">
+                        <p>{{site_data.description}}</p>
                     </div>
                 </div>
-                <!-- //.carousel-inner -->
-            </div>
-            <!-- //.carousel -->
-            <p>{{site_data.description}}</p>
 
-            <!-- //.carousel -->
-            <div class="page-scroll">
+                <!--Short Description-->
+                <div class="col-md-4 col-sm-12 col-xs-12" ng-if="site_data.short_descriptions">
+
+                    <uib-carousel interval="carouselInterval" >
+                        <uib-slide ng-repeat="desc in site_data.short_descriptions" active="slide.active">
+                            <div class="carousel-content">
+                                <p>{{desc}}</p>
+                            </div>
+                        </uib-slide>
+                    </uib-carousel>
+
+                    <div id="short_descriptions_carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" ng-repeat="desc in site_data.short_descriptions">
+                            <div class="item">
+                                <div class="carousel-content animated">
+                                    <p class="carousel-text">{{desc}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //.carousel-inner -->
+                    </div>
+                    <!-- //.carousel -->
+                </div>
+            </div>
+
+            <div>
                 <p>Follow me on Social Media!</p>
 
-                <div class="social">
-                    <a ng-show="site_data.social.youtube" href="http://www.youtube.com/{{site_data.social.youtube}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                <div class="btn-group">
+                    <a type="button" ng-show="site_data.social.youtube" ng-href="http://www.youtube.com/{{site_data.social.youtube}}/"
+                       class="btn btn-sm btn-primary" target="_blank"><i
                             class="fa fa-youtube-play"></i></a>
-                    <a ng-show="site_data.social.instagram" href="http://www.instagram.com/{{site_data.social.instagram}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                    <a type="button" ng-show="site_data.social.instagram"
+                       ng-href="http://www.instagram.com/{{site_data.social.instagram}}/" class="btn btn-sm btn-primary"
+                       target="_blank"><i
                             class="fa fa-instagram "></i></a>
-                    <a ng-show="site_data.social.pinterest" href="http://www.pinterest.com/{{site_data.social.pinterest}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                    <a type="button" ng-show="site_data.social.pinterest"
+                       ng-href="http://www.pinterest.com/{{site_data.social.pinterest}}/" class="btn btn-sm btn-primary"
+                       target="_blank"><i
                             class="fa fa-pinterest"></i></a>
-                    <a ng-show="site_data.social.twitter" href="http://www.twitter.com/{{site_data.social.twitter}}/" class="btn btn-sm btn-custom" target="_blank"><i
+                    <a type="button" ng-show="site_data.social.twitter" ng-href="http://www.twitter.com/{{site_data.social.twitter}}/"
+                       class="btn btn-sm btn-primary" target="_blank"><i
                             class="fa fa-twitter "></i></a>
                 </div>
-                <br>
-                <a href="/about" class=" btn btn-sm btn-custom">Who is {{site_data.owner}} Really?</a>
+                <br><br>
+                <a ng-href="https://twitter.com/share" class="twitter-share-button">Share</a> |
+
+                <a ng-href="https://twitter.com/{{site_data.social.twitter}}" class="twitter-follow-button"
+                   data-show-count="false">
+                    Follow @{{site_data.social.twitter}}</a> |
+
+                <a ng-href="https://twitter.com/intent/tweet?button_hashtag=#{{site_data.title}}"
+                   class="twitter-hashtag-button">Tweet
+                    #{{site_data.title}}</a> |
+
+                <a ng-href="https://twitter.com/intent/tweet?screen_name={{site_data.social.twitter}}" class="twitter-mention-button">
+                    Tweet to @{{site_data.social.twitter}}</a>
+                <br><br>
+                <a type="button" ng-href="/about" class=" btn btn-primary">Who is {{site_data.owner}} Really?</a>
                 <br><br>
                 <br><br>
             </div>

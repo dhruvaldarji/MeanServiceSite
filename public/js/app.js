@@ -12,5 +12,17 @@ angular.module('app',
         'AppointmentCtrl',
         'AppointmentService',
         'AboutCtrl',
-        'AboutService'
+        'AboutService',
+        'ng-mfb'
     ]);
+
+//Non-Angular JS
+$(function(){
+
+    //Close Navbar dropdown on option select
+    $('.nav a').on('click', function () {
+        $('.btn-navbar').click(); //bootstrap 2.x
+        $('.navbar-toggle').click(); //bootstrap 3.x by Richard
+    });
+
+});

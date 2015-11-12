@@ -30,6 +30,12 @@ angular.module('AppointmentService', []).factory('Appointment', ['$http', functi
         //call to get instance of cart.
         localCart : function(){
             return cart;
+        },
+
+        //call to empty cart
+        emptyCart : function(){
+            cart = [];
+            return cart;
         }
     }
 

@@ -1,36 +1,45 @@
 <!-- CONTACT SECTION START -->
-<section id="appointment" class="section">
-    <div class="container-fluid section-wrapper">
-        <div class="section-content">
+<section id="appointment">
+    <div class="container-fluid">
+        <div>
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h2 id="title" class="section-title uppercase">Your Appointments</h2>
-                    <p class="section-subtitle">Want To Schedule an Appointment?</p>
-                    <span class="divider center"></span>
+                    <h2 id="title">Your Appointments</h2>
+                    <p>Want To Schedule an Appointment?</p>
                 </div>
                 <!-- //.col-md-12 -->
             </div>
             <!-- //.row -->
+
+            <hr/>
+
+            <nav mfb-menu position="br" effect="zoomin" label="Cart Menu"
+                 active-icon="fa fa-arrow-down" resting-icon="fa fa-bars">
+                <button mfb-button icon="fa fa-arrow-left" id="goToServices" label="Go to Services"
+                        ng-click="go('/services')"></button>
+                <button mfb-button icon="fa fa-trash-o" label="Empty Cart" id="emptyCartButton"
+                        ng-click="EmptyCart()"></button>
+            </nav>
 
             <div class="row">
                 <div class="col-md-12 text-center" ng-hide="Cart.length > 0">
-                    <h2>No Appointments</h2>
+                    <h4>No Appointments</h4>
                     <p>Check out our Services to below to schedule an appointment.</p>
-                    <a href="/services" class=" btn btn-sm btn-custom">Services</a>
-
+                    <a type="button" ng-href="/services" class="btn btn-primary">Services</a>
                 </div>
-                <div class="col-md-12" ng-show="Cart.length > 0" ng-repeat="service in Cart">
+                <!--.col-md-12-->
+                <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2" ng-show="Cart.length > 0" ng-repeat="service in Cart">
                     <!-- APPOINTMENT DETAILS START -->
                     <div>
-                        <h3>Item: {{service.category}} - {{service.name}}</h3>
+                        <p>Item: {{service.category}} - {{service.name}}</p>
                     </div>
                     <!-- //CONTACT DETAILS END -->
                 </div>
-                <!-- //.col-md-12 -->
+                <!-- //.col-xs-12 col-sm-12 col-md-4 col-md-offset-2 -->
+
             </div>
             <!-- //.row -->
         </div>
-        <!-- //.section-content -->
     </div>
     <!-- //.container -->
 </section>

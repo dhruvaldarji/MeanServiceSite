@@ -7,70 +7,93 @@
 
                     <p class="section-subtitle">{{tagline}}</p>
                     <span class="divider center"></span>
-                    <button id="createServiceButton" type="button" class="btn btn-custom" ng-click="openNewServiceModal()">Add Service</button>
+
+                    <div ng-show="Cart.length>0">
+                        <pre class="alert alert-info" role="alert" ng-show="Cart.length===1">There is {{Cart.length}} item in the cart.</pre>
+                        <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1">There are {{Cart.length}} items in the cart.</pre>
+                    </div>
                 </div>
                 <!-- //.col-md-8 -->
             </div>
             <!-- //.row -->
 
-            <div ng-show="Cart.length>0">
-                <pre class="alert alert-info" role="alert" ng-show="Cart.length===1">There is {{Cart.length}} item in the cart.</pre>
-                <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1">There are {{Cart.length}} items in the cart.</pre>
-            </div>
+            <nav mfb-menu position="br" effect="zoomin" label="Cart Menu"
+                 active-icon="fa fa-arrow-down" resting-icon="fa fa-bars">
+                <button mfb-button icon="fa fa-shopping-cart" id="goToCart" label="Go To Cart"
+                        ng-click="go('/appointments')"></button>
+                <button mfb-button icon="fa fa-trash-o" label="Empty Cart" id="emptyCartButton"
+                        ng-click="EmptyCart()"></button>
+                <button mfb-button icon="fa fa-edit" label="Add a new Service" id="createServiceButton"
+                        ng-show="admin"
+                        ng-click="openNewServiceModal()"></button>
+            </nav>
 
             <!-- CATEGORIES LIST START -->
-            <div class="row services-list animate-in" data-anim-type="fade-in-up">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="panel-group service" id="category" ng-repeat="category in categories">
-                        <div class="service-item">
-                            <div class="service-category">
-                                <span class="service-category">{{category.name}}</span>
-                            </div>
-                            <!-- //.service-category -->
+            <div class="row container-fluid ng-animate" data-anim-type="fade-in-up">
+                <!--<div class="col-md-offset-4 col-md-4 text-center">-->
+                <!--<div class="list-inline">-->
+                <!--<a class="btn btn-default" id="createServiceButton" ng-show="admin"-->
+                <!--ng-click="openNewServiceModal()">Add Service</a>-->
+                <!--<a type="button" class="btn btn-primary" id="goToCart" ng-href="/appointments"><i-->
+                <!--class="fa fa-align-center fa-shopping-cart"></i></a>-->
+                <!--</div>-->
+                <!--</div>-->
+                <br><br>
 
-                            <div class="service-btn">
-                                <a href="#{{category._id}}" data-toggle="collapse" data-parent="#category"></a>
-                            </div>
-                            <!-- //.service-btn -->
-
-                            <div class="panel">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <div class="list-group" ng-repeat="service in category.services">
-                                            <ul class="list-inline">
-                                                <button type="button" class="btn btn-custom"
-                                                        ng-click="AddToCart(service._id)"
-                                                        title="Add To Cart">Add To Cart
-                                                </button>
-                                                <li><a id="serviceName" ng-click="openDisplayServiceModal(service._id)" ng-bind="service.name"></a>:</li>
-                                                <li><strong>${{service.price}}</strong></li>
-                                                <button id="editServiceButton" type="button" class="btn btn-custom" ng-click="openEditServiceModal(service._id)">Edit</button>
-                                                <button id="deleteServiceButton" type="button" class="btn btn-custom" ng-click="openDeleteServiceModal(service._id)">Delete</button>
-
-                                            </ul>
-                                        </div>
+                <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="panel-group" id="category_list" ng-repeat="category in categories">
+                        <div class="panel panel-default" id="{{category._id}}" data-toggle="collapse"
+                             data-parent="#category_list">
+                            <div class="panel-heading"><h2 class="text-center" ng-bind="category.name"></h2></div>
+                            <!--.panel_heading-->
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-offset-2 col-md-4 col-sm-12 col-xs-12">
+                                        <h3 class="text-center">Services</h3>
                                         <hr/>
-                                        <p ng-show="category.description">Description: </p>
+                                        <div class="row list-group" ng-repeat="service in category.services">
+                                            <div class="col list-group-item">
+                                                <a type="button" class="btn btn-success"
+                                                   ng-click="AddToCart(service._id)" title="Add To Cart">
+                                                    <i class="fa  fa-align-center fa-cart-plus"></i></a>
+                                                <strong> ${{service.price}}</strong>:
+                                                <a id="serviceName"
+                                                   ng-click="openDisplayServiceModal(service._id)"
+                                                   ng-bind="service.name"></a>
+
+                                                <div class="btn-group pull-right" ng-show="admin">
+                                                    <a id="editServiceButton" type="button"
+                                                       class="btn btn- btn-warning"
+                                                       ng-click="openEditServiceModal(service._id)">
+                                                        <i class="fa fa-align-center fa-edit"></i></a>
+                                                    <a id="deleteServiceButton" type="button"
+                                                       class="btn btn-danger"
+                                                       ng-click="openDeleteServiceModal(service._id)">
+                                                        <i class="fa fa-trash-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!-- //.panel-title -->
-                                </div>
-                                <!-- //.panel-heading -->
-                                <div id="{{category._id}}" class="panel-collapse collapse in"
-                                     ng-show="category.description">
-                                    <div class="panel-body text-light-grey">
-                                        <p>
-                                            {{category.description}}
-                                        </p>
+                                    <!--Services-->
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <h3 class="text-center">Description</h3>
+                                        <hr/>
+                                        <p ng-show="category.description" ng-bind="category.description"></p>
+
+                                        <p ng-hide="category.description">There is no description for this category.</p>
                                     </div>
-                                    <!-- //.panel-body -->
+                                    <!--Descriptions-->
                                 </div>
-                                <!-- //.panel-collapse -->
                             </div>
-                            <!-- //.panel -->
+                            <!--.panel-body-->
+                            <div class="panel-footer" href="#page-top"></div>
+                            <!--.panel-footer-->
                         </div>
-                        <!-- //.service-item -->
+                        <!--.panel-->
                     </div>
+                    <!--.panel-group .container-fluid-->
                 </div>
+                <!--.row-->
             </div>
         </div>
     </div>
@@ -97,11 +120,11 @@
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="newServicePrice">Service Price: </label>
                     <input id="newServicePrice" type="number" ng-model="newService.price"/><br/>
-                    </div>
+                </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="newServiceDescription">Service Description: </label>
                     <input id="newServiceDescription" type="text" ng-model="newService.description"/><br/>
-                    </div>
+                </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="newServiceDuration">Service Duration: </label>
                     <input id="newServiceDuration" type="number" ng-model="newService.duration"/><br/>
@@ -115,14 +138,23 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <label>Results:</label><br>
+
             <p ng-bind="results"></p>
         </div>
         <div class="modal-footer">
-            <button id="CloseButton" class="btn btn-danger" type="button" ng-show="stage == 2" ng-click="cancel()">Close</button>
-            <button id="CreateAnotherServiceButton" class="btn btn-primary" type="button" ng-show="stage == 2" ng-click="stage = 0">Create New Service</button>
+            <a id="CloseButton" class="btn btn-danger" type="button" ng-show="stage == 2" ng-click="cancel()">
+                Close
+            </a>
+            <a id="CreateAnotherServiceButton" class="btn btn-primary" type="button" ng-show="stage == 2"
+               ng-click="stage = 0">Create New Service
+            </a>
 
-            <button id="CancelButton" class="btn btn-danger" type="button" ng-show="stage == 0" ng-click="cancel()">Cancel</button>
-            <button id="SubmitButton" class="btn btn-primary" type="button" ng-show="stage == 0" ng-click="submitService()">Create Service</button>
+            <a id="CancelButton" class="btn btn-danger" type="button" ng-show="stage == 0" ng-click="cancel()">
+                Cancel
+            </a>
+            <a id="SubmitButton" class="btn btn-primary" type="button" ng-show="stage == 0"
+               ng-click="submitService()">Create Service
+            </a>
         </div>
     </script>
 </div>
@@ -141,28 +173,33 @@
             <div class="row form-group">
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="currentServiceName">Service Name: </label>
+
                     <p id="currentServiceName" ng-bind="currentService.name"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="currentServiceCategory">Service Category: </label>
+
                     <p id="currentServiceCategory" ng-bind="currentService.category"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="currentServicePrice">Service Price: </label>
+
                     <p id="currentServicePrice" ng-bind="currentService.price"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="currentServiceDescription">Service Description: </label>
+
                     <p id="currentServiceDescription" ng-bind="currentService.description"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="currentServiceDuration">Service Duration: </label>
+
                     <p id="currentServiceDuration" ng-bind="currentService.duration"></p><br/>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button id="displayCancelButton" class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
+            <a id="displayCancelButton" class="btn btn-danger" type="button" ng-click="cancel()">Cancel</a>
         </div>
     </script>
 </div>
@@ -206,13 +243,16 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <label>Results:</label><br>
+
             <p ng-bind="results"></p>
         </div>
         <div class="modal-footer">
-            <button id="editCloseButton" class="btn btn-danger" type="button" ng-show="stage == 2" ng-click="cancel()">Close</button>
-
-            <button id="editCancelButton" class="btn btn-danger" type="button" ng-show="stage == 0" ng-click="cancel()">Cancel</button>
-            <button id="editSubmitButton" class="btn btn-primary" type="button" ng-show="stage == 0" ng-click="submitEditService()">Edit Service</button>
+            <a id="editCloseButton" class="btn btn-danger" type="button" ng-show="stage == 2" ng-click="cancel()">
+                Close</a>
+            <a id="editCancelButton" class="btn btn-danger" type="button" ng-show="stage == 0" ng-click="cancel()">
+                Cancel</a>
+            <a id="editSubmitButton" class="btn btn-primary" type="button" ng-show="stage == 0"
+               ng-click="submitEditService()">Edit Service</a>
         </div>
     </script>
 </div>
@@ -226,22 +266,27 @@
             <div class="row form-group">
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="deleteServiceName">Service Name: </label>
+
                     <p id="deleteServiceName" ng-bind="deleteService.name"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="deleteServiceCategory">Service Category: </label>
+
                     <p id="deleteServiceCategory" ng-bind="deleteService.category"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="deleteServicePrice">Service Price: </label>
+
                     <p id="deleteServicePrice" ng-bind="deleteService.price"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="deleteServiceDescription">Service Description: </label>
+
                     <p id="deleteServiceDescription" ng-bind="deleteService.description"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
                     <label for="deleteServiceDuration">Service Duration: </label>
+
                     <p id="deleteServiceDuration" ng-bind="deleteService.duration"></p><br/>
                 </div>
                 <div class="col col-md-offset-1 col-md-4">
@@ -257,13 +302,16 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <label>Results:</label><br>
+
             <p ng-bind="results"></p>
         </div>
         <div class="modal-footer">
-            <button id="deleteCloseButton" class="btn btn-danger" type="button" ng-show="stage == 2" ng-click="cancel()">Close</button>
-
-            <button id="deleteCancelButton" class="btn btn-danger" type="button" ng-show="stage == 0" ng-click="cancel()">Cancel</button>
-            <button id="deleteSubmitButton" class="btn btn-warning" type="button" ng-show="stage == 0" ng-click="deleteSubmitService()">Delete Service</button>
+            <a id="deleteCloseButton" class="btn btn-danger" type="button" ng-show="stage == 2"
+               ng-click="cancel()">Close</a>
+            <a id="deleteCancelButton" class="btn btn-danger" type="button" ng-show="stage == 0"
+               ng-click="cancel()">Cancel</a>
+            <a id="deleteSubmitButton" class="btn btn-warning" type="button" ng-show="stage == 0"
+               ng-click="deleteSubmitService()">Delete Service</a>
         </div>
     </script>
 </div>

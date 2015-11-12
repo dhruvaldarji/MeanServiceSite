@@ -20,20 +20,20 @@
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/angular-bootstrap/ui-bootstrap-csp.css">
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="libs/icons-mind/style.css">
-    <link rel="stylesheet" href="libs/animate.css/animate.css">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- custom styles -->
+    <link rel="stylesheet" href="libs/ng-material-floating-button/mfb/dist/mfb.css">
 
-    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <!--CUSTOM CSS-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <!--<link rel="stylesheet" href="libs/animate.css/animate.css">-->
 
 </head>
-<body>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
 <!-- NAVIGATION START -->
 <header>
-    <nav id="navigation" class="navbar navbar-fixed-top center-menu" role="navigation">
-        <div class="container container-fluid navbar-container">
+    <nav id="navigation" class="navbar navbar-fixed-top navbar-default center-menu" role="navigation">
+        <div class="container navbar-container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".custom-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -47,13 +47,15 @@
             </div>
             <!-- //.navbar-header -->
 
-            <div class="navbar-collapse collapse custom-collapse">
-                <ul class="nav navbar-nav">
-                    <li id="HomeLink" class="page-scroll"><a href="/home">HOME</a></li>
-                    <li id="ServicesLink" class="page-scroll"><a href="/services">SERVICES</a></li>
-                    <li id="AboutLink"  class="page-scroll"><a href="/about">ABOUT</a></li>
-                    <li id="AppointmentsLink" class="page-scroll"><a href="/appointments/">Cart <i class="icon-Shopping-Cart"></i></a></li>
-                    <!-- TEMP USERS TAB-->
+            <div class="navbar-collapse collapse custom-collapse navbar-right">
+                <ul class="nav navbar-nav text-center ">
+                    <!--<li id="HomeLink" class="page-scroll"><a href="/home">HOME</a></li>-->
+                    <li id="AppointmentsLink"><a ng-href="/appointments">CART <i
+                            class="fa fa-align-center fa-shopping-cart" style="font-size: larger"></i></a></li>
+                    <li id="ServicesLink"><a ng-href="/services">SERVICES</a></li>
+                    <li id="AboutLink"><a ng-href="/about">ABOUT</a></li>
+                    <!-- TESTING STUFF-->
+                    <li><a ng-click="admin = !admin"><i class="fa fa-cog fa-spin fa-lg "></i></a></li>
                     <!--<li class="page-scroll"><a href="/users">USERS</a></li>-->
                 </ul>
             </div>
@@ -68,11 +70,12 @@
 
 <!-- FOOTER START -->
 <footer class="footer">
+    <hr/>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="page-scroll">
-                    <a href="#page-top" style="z-index: 999"><i class="icon-Arrow-Up"></i></a>
+                    <a href="#" style="z-index: 999"><i class="icon-Arrow-Up"></i></a>
                 </div>
                 <!-- //.page-scroll -->
 
@@ -93,9 +96,12 @@
             <div class="col-md-12">
                 <div class="copyright text-center">
                     <p class="text-light-grey"> &copy; 2015
-                        <a title={{site_data.title}} href="#" target="_blank">{{site_data.title}} </a>
+                        <a title={{site_data.title}} href="/home" target="_blank">{{site_data.title}} </a>
                         All Rights Reserved | by
-                        <a title="{{site_data.owner}}" href="#" target="_blank">{{site_data.owner}}</a>
+                        <a title="{{site_data.owner}}" href="/about" target="_blank">{{site_data.owner}}</a>
+                        <br> Developed by
+                        <a title="Developed by Dhruval Darji" href="http://dhruvaldarji.com" target="_blank">Dhruval
+                            Darji</a>
                     </p>
                 </div>
                 <!-- //.copyright -->
@@ -110,10 +116,7 @@
 
 
 <!-- JS -->
-<script src="libs/easing/jquery.easing.min.js"></script>
-<script src="libs/sticky/jquery.sticky.js"></script>
-<script src="libs/matchHeight/jquery.matchHeight-min.js"></script>
-<script src="libs/detectmobilebrowser/detectmobilebrowser.js"></script>
+<script src="libs/jquery/dist/jquery.min.js"></script>
 
 <!--Angular & Bootstrap-->
 <script src="libs/angular/angular.min.js"></script>
@@ -121,6 +124,8 @@
 <script src="libs/angular-bootstrap/ui-bootstrap.js"></script>
 <script src="libs/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="libs/angular-route/angular-route.min.js"></script>
+<script src="libs/ng-material-floating-button/mfb/dist/mfb.js"></script>
+<script src="libs/ng-material-floating-button/src/mfb-directive.js"></script>
 
 
 <!-- ANGULAR CUSTOM -->
@@ -144,8 +149,8 @@
 <script src="js/services/AboutService.js"></script>
 
 <!--OTHER JS-->
-<script src="js/main.js"></script>
-<script src="js/animation.js"></script>
+<!--<script src="js/main.js"></script>-->
+<!--<script src="js/animation.js"></script>-->
 
 </body>
 

@@ -44,4 +44,17 @@ angular.module('AppointmentCtrl', []).controller('AppointmentController', functi
         $scope.Cart = LoadCart(Appointment.localCart());
     }
 
+
+    $scope.EmptyCart = function(){
+        //Present Confirmation Dialog to empty cart
+        var result = false;
+        result = window.confirm("Are you sure you want to empty your cart?");
+        if(result){
+            $scope.Cart = Appointment.emptyCart();
+        }
+        else {
+            //do nothing
+        }
+    };
+
 });

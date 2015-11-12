@@ -86,6 +86,18 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
         //console.log("Cart After: ", $scope.Cart);
     };
 
+    $scope.EmptyCart = function(){
+        //Present Confirmation Dialog to empty cart
+        var result = false;
+        result = window.confirm("Are you sure you want to empty your cart?");
+        if(result){
+            $scope.Cart = Appointment.emptyCart();
+        }
+        else {
+            //do nothing
+        }
+    };
+
     $scope.openNewServiceModal = function () {
 
         var modalInstance = $uibModal.open({
@@ -231,7 +243,7 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
     };
 });
 
-angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope, $uibModalInstance, Service, currentServiceID) {
+angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope, $uibModalInstance, Service, Category, currentServiceID) {
 
     $scope.stage = 1; // Processing
 
@@ -239,9 +251,19 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
         .then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
-            $scope.results = "Success";
             $scope.response = response;
             $scope.currentService = response.data;
+
+            Category.read($scope.currentService.category)
+                .then(function successCallback(res){
+                    $scope.currentService.category = res.data.name;
+                }, function errorCallback(res){
+                    $scope.currentService.category = "Other";
+                });
+
+            $scope.results = "Success";
+
+
             $scope.stage = 2; // Display Results
         }, function errorCallback(response) {
             // called asynchronously if an error occurs

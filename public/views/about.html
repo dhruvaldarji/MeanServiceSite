@@ -5,45 +5,40 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2 id="title" class="section-title uppercase">Contact Us</h2>
-                    <p class="section-subtitle">Want To Schedule an Appointment?</p>
+                    <h4 class="section-subtitle">Want To Schedule an Appointment?</h4>
                     <span class="divider center"></span>
                 </div>
                 <!-- //.col-md-12 -->
             </div>
             <!-- //.row -->
 
+            <hr/>
+
             <div class="row">
                 <div class="col-md-12">
 
                     <!-- CONTACT DETAILS START -->
                     <div class="contact-details text-center">
-                        <div class="speech-bubble">
-                            <i class="icon-Speach-Bubble11"></i>
 
-                            <h4 class="uppercase text-light-grey">
-                                Say<br>Hello
-                            </h4>
-                        </div>
-                        <!-- //.speech-bubble -->
-
-                        <h2 class="uppercase"><strong>{{site_data.title}}</strong></h2>
+                        <h2><strong>{{site_data.title}}</strong></h2>
 
                         <h3>{{site_data.owner}}</h3>
 
-                        <span class="divider center"></span>
+                        <hr/>
 
                         <ul class="list-inline">
                             <li>
-                                <h3 style="text-decoration: underline;">Quick Contact</h3>
-                                <h4> Email : <a title="Send me an Email" href="mailto:{{site_data.contact_email}}">{{site_data.contact_email}}</a></h4>
-                                <h4>Call : <a title="Call Me" href="tel://{{site_data.contact_number}}">{{site_data.contact_number}}</a></h4>
+                                <h4>Quick Contact</h4>
+                                <hr/>
+                                <p> Email : <a title="Send me an Email" ng-href="mailto:{{site_data.contact_email}}">{{site_data.contact_email}}</a></p>
+                                <p>Call : <a title="Call Me" ng-href="tel://{{site_data.contact_number}}">{{site_data.contact_number}}</a></p>
                             </li>
-                            <li></li>
                             <li>
-                                <h3 style="text-decoration: underline;">Address</h3>
+                                <h4>Address</h4>
+                                <hr/>
                                 <address>
-                                    <h4>Provided Upon</h4>
-                                    <h4>Appointment</h4>
+                                    <p>Provided Upon</p>
+                                    <p>Appointment</p>
                                 </address>
                             </li>
                         </ul>
