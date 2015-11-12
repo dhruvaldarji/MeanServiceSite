@@ -9,15 +9,18 @@ This is a basic MEAN application for Service Oriented Businesses.
 5. View in browser at `http://localhost:3000`
 
 ## Features
-A Full Mean Stack website featuring Home, Services, and About.
+A Full Mean Stack website featuring:
+- Home Page
+- Services List
+- About Page
 
 
 ## Contact
 If you have any questions or requests, email us at [dhruvaldarji@gmail.com](mailto:dhruvaldarji@gmail.com)
 
 ## Future Additions
-- Service List
 - Appointment System
+- Administrative Features
 
 
 ## Testing
