@@ -30,16 +30,6 @@
 
             <!-- CATEGORIES LIST START -->
             <div class="row container-fluid ng-animate" data-anim-type="fade-in-up">
-                <!--<div class="col-md-offset-4 col-md-4 text-center">-->
-                <!--<div class="list-inline">-->
-                <!--<a class="btn btn-default" id="createServiceButton" ng-show="admin"-->
-                <!--ng-click="openNewServiceModal()">Add Service</a>-->
-                <!--<a type="button" class="btn btn-primary" id="goToCart" ng-href="/appointments"><i-->
-                <!--class="fa fa-align-center fa-shopping-cart"></i></a>-->
-                <!--</div>-->
-                <!--</div>-->
-                <br><br>
-
                 <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
                     <div class="panel-group" id="category_list" ng-repeat="category in categories">
                         <div class="panel panel-default" id="{{category._id}}" data-toggle="collapse"
@@ -132,9 +122,8 @@
             </div>
         </div>
         <div class="modal-body modal-color" ng-show="stage === 1">
-            <div class="progress progress-striped active" data-keyboard="false">
-                <div class="bar" style="width: 100%;"></div>
-            </div>
+            <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}}
+                <i ng-show="showWarning">!!! Watch out !!!</i></uib-progressbar>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <label>Results:</label><br>
@@ -165,9 +154,8 @@
             <h3 class="modal-title modal-text" id="displayModalHeader">Display Service</h3>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 1">
-            <div class="progress progress-striped active" data-keyboard="false">
-                <div class="bar" style="width: 100%;"></div>
-            </div>
+            <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}}
+                <i ng-show="showWarning">!!! Watch out !!!</i></uib-progressbar>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <div class="row form-group">
@@ -237,9 +225,8 @@
             </div>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 1">
-            <div class="progress progress-striped active" data-keyboard="false">
-                <div class="bar" style="width: 100%;"></div>
-            </div>
+            <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}}
+                <i ng-show="showWarning">!!! Watch out !!!</i></uib-progressbar>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <label>Results:</label><br>
@@ -296,9 +283,8 @@
             </div>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 1">
-            <div class="progress progress-striped active" data-keyboard="false">
-                <div class="bar" style="width: 100%;"></div>
-            </div>
+            <uib-progressbar class="progress-striped active" value="dynamic" type="{{type}}">{{type}}
+                <i ng-show="showWarning">!!! Watch out !!!</i></uib-progressbar>
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <label>Results:</label><br>

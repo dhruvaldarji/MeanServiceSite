@@ -189,7 +189,7 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
 
 });
 
-angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, $uibModalInstance, Category, Service) {
+angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, $uibModalInstance, $timeout, Category, Service) {
 
     $scope.newService = {
         name: null,
@@ -204,6 +204,7 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
             // this callback will be called asynchronously
             // when the response is available
             $scope.results = "Success";
+            $scope.type = "success";
             $scope.response = response;
             $scope.categories = response.data;
             $scope.newService.category = $scope.categories[0];
@@ -212,6 +213,7 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
             // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.results = "Failure";
+            $scope.type = "warning";
             $scope.response = response;
             $scope.newCats = [];
         });
@@ -235,7 +237,9 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
 
         //console.log("Results: ", $scope.results);
 
-        $scope.stage = 2; // Show results
+        setTimeout(function(){
+            $scope.stage = 2; // Show results
+        }, 1000);
     };
 
     $scope.cancel = function () {
@@ -243,7 +247,7 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
     };
 });
 
-angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope, $uibModalInstance, Service, Category, currentServiceID) {
+angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope, $uibModalInstance, $timeout, Service, Category, currentServiceID) {
 
     $scope.stage = 1; // Processing
 
@@ -257,18 +261,21 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
             Category.read($scope.currentService.category)
                 .then(function successCallback(res){
                     $scope.currentService.category = res.data.name;
+                    $scope.results = "Success";
+                    $scope.type = "success";
                 }, function errorCallback(res){
                     $scope.currentService.category = "Other";
                 });
 
-            $scope.results = "Success";
+            $timeout(function(){
+                $scope.stage = 2; // Show results
+            }, 1000);
 
-
-            $scope.stage = 2; // Display Results
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.results = "Failure";
+            $scope.type = "warning";
             $scope.response = response;
             $scope.currentService = {
                 name: null,
@@ -278,7 +285,9 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
                 duration: null
             };
 
-            $scope.stage = 2; // Display Results
+            $timeout(function(){
+                $scope.stage = 2; // Show results
+            }, 1000);
 
         });
 
@@ -288,7 +297,7 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
     };
 });
 
-angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $uibModalInstance, Service, Category, editServiceID) {
+angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $uibModalInstance, $timeout, Service, Category, editServiceID) {
 
     $scope.stage = 1; // Entering information
 
@@ -332,12 +341,12 @@ angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $u
         .then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
-            $scope.results = "Success";
             $scope.response = response;
             $scope.categories = response.data;
             var temp = $scope.editService.category;
             var index = findCategory($scope.categories, temp);
             $scope.editService.category = $scope.categories[index];
+            $scope.results = "Success";
 
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -355,17 +364,21 @@ angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $u
                 // this callback will be called asynchronously
                 // when the response is available
                 $scope.results = "Success";
+                $scope.type = "success";
                 $scope.response = response;
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 $scope.results = "Failure";
+                $scope.type = "warning";
                 $scope.response = response;
             });
 
-        //console.log("Results: ", $scope.results);
+        $timeout(function(){
+            $scope.stage = 2; // Show results
+        }, 1000);
 
-        $scope.stage = 2; // Show results
+        //console.log("Results: ", $scope.results);
     };
 
     $scope.cancel = function () {
@@ -373,7 +386,7 @@ angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $u
     };
 });
 
-angular.module('ServiceCtrl').controller('DeleteServiceCtrl', function ($scope, $uibModalInstance, Service, deleteServiceID) {
+angular.module('ServiceCtrl').controller('DeleteServiceCtrl', function ($scope, $uibModalInstance, $timeout, Service, Category, deleteServiceID) {
 
     $scope.stage = 1; // Getting Data
 
@@ -381,9 +394,17 @@ angular.module('ServiceCtrl').controller('DeleteServiceCtrl', function ($scope, 
         .then(function successCallback(response) {
             // this callback will be called asynchronously
             // when the response is available
-            $scope.results = "Success";
             $scope.response = response;
             $scope.deleteService = response.data;
+
+            Category.read($scope.deleteService.category)
+                .then(function successCallback(res){
+                    $scope.deleteService.category = res.data.name;
+                    $scope.results = "Success";
+                }, function errorCallback(res){
+                    $scope.deleteService.category = "Other";
+                });
+
             $scope.stage = 0; // Display Results
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
@@ -397,9 +418,7 @@ angular.module('ServiceCtrl').controller('DeleteServiceCtrl', function ($scope, 
                 description: null,
                 duration: null
             };
-
             $scope.stage = 0; // Display Results
-
         });
 
     $scope.deleteSubmitService = function () {
@@ -410,18 +429,26 @@ angular.module('ServiceCtrl').controller('DeleteServiceCtrl', function ($scope, 
                 // this callback will be called asynchronously
                 // when the response is available
                 $scope.results = "Success";
+                $scope.type = "success";
                 $scope.response = response;
                 //console.log("Results: ", $scope.results);
+
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 $scope.results = "Failure";
+                $scope.type = "warning";
                 $scope.response = response;
                 //console.log("Results: ", $scope.results);
-            });
-        //console.log("Results: ", $scope.results);
+                $scope.stage = 2; // Show results
 
-        $scope.stage = 2; // Show results
+            });
+
+        $timeout(function(){
+            $scope.stage = 2; // Show results
+        }, 1000);
+
+        //console.log("Results: ", $scope.results);
     };
 
     $scope.cancel = function () {
