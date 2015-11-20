@@ -28,12 +28,36 @@
                     <a type="button" ng-href="/services" class="btn btn-primary">Services</a>
                 </div>
                 <!--.col-md-12-->
-                <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2" ng-show="Cart.length > 0" ng-repeat="service in Cart">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-2" ng-show="Cart.length > 0" ng-repeat="appt in Cart">
                     <!-- APPOINTMENT DETAILS START -->
                     <div>
-                        <p>Item: {{service.category}} - {{service.name}}</p>
+                        <p>Item: {{appt.category}} - {{appt.name}}</p>
+                        <div ng-controller="AppointmentController">
+                            <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+                            <h4>Enter Your Name</h4>
+                            <input ng-bind="appt.client" type="text"/>
+                            <h4>Select Time</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="input-group">
+                                        <input ng-bind="appt.date" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+                                               is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions"
+                                               date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                      <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <input ng-bind="appt.comments" type="text"/>
+                        </div>
                     </div>
+
+
                     <!-- //CONTACT DETAILS END -->
+                </div>
+                <div id="submittAppointments">
+                    <button ng-click="submitAllAppointments" class="btn btn-success">Submit</button>
                 </div>
                 <!-- //.col-xs-12 col-sm-12 col-md-4 col-md-offset-2 -->
 
