@@ -14,16 +14,17 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "latest",
+    "angular": "1.4.8",
     "angular-bootstrap": "latest",
-    "angular-route": "latest",
+    "angular-route": "1.4.8",
     "animate.css": "latest",
     "bootstrap": "latest",
     "font-awesome": "latest",
     "jquery": "latest",
-    "ng-material-floating-button": "ng-mfb#~0.6.2"
+    "ng-material-floating-button": "ng-mfb#~0.6.2",
+    "ngstorage": "~0.3.10"
   },
   "resolutions": {
-    "angular": "1.4.7"
+    "angular": "1.4.8"
   }
 }

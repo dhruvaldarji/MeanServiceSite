@@ -13,11 +13,12 @@ angular.module('app',
         'AppointmentService',
         'AboutCtrl',
         'AboutService',
-        'ng-mfb'
+        'ng-mfb',
+        'ngStorage'
     ]);
 
 //Non-Angular JS
-$(function(){
+$(function () {
 
     //Close Navbar dropdown on option select
     $('.nav a').on('click', function () {

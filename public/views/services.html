@@ -8,16 +8,23 @@
                     <p class="section-subtitle">{{tagline}}</p>
                     <span class="divider center"></span>
 
-                    <div ng-show="Cart.length>0">
-                        <pre class="alert alert-info" role="alert" ng-show="Cart.length===1">There is {{Cart.length}} item in the cart.</pre>
-                        <pre class="alert alert-info" role="alert" ng-hide="Cart.length===1">There are {{Cart.length}} items in the cart.</pre>
+                    <a class="btn btn-primary" ng-click="go('/appointments')">Go to Cart <i class="fa fa-shopping-cart"></i></a>
+
+                    <div ng-show="$storage.Cart.length>0">
+                        <pre class="alert alert-info" role="alert" ng-show="$storage.Cart.length===1">There is {{$storage.Cart.length}} item in the cart.</pre>
+                        <pre class="alert alert-info" role="alert" ng-hide="$storage.Cart.length===1">There are {{$storage.Cart.length}} items in the cart.</pre>
                     </div>
+
+                    <div ng-show="categories.length <= 0">
+                        <pre class="alert alert-warning" role="alert"> Please wait while services load. Thank You!</pre>
+                    </div>
+
                 </div>
                 <!-- //.col-md-8 -->
             </div>
             <!-- //.row -->
 
-            <nav mfb-menu position="br" effect="zoomin" label="Cart Menu"
+            <nav mfb-menu position="br" effect="slidein-spring" label="Cart Menu"
                  active-icon="fa fa-arrow-down" resting-icon="fa fa-bars">
                 <button mfb-button icon="fa fa-shopping-cart" id="goToCart" label="Go To Cart"
                         ng-click="go('/appointments')"></button>
@@ -27,6 +34,8 @@
                         ng-show="admin"
                         ng-click="openNewServiceModal()"></button>
             </nav>
+
+            <br/>
 
             <!-- CATEGORIES LIST START -->
             <div class="row container-fluid ng-animate" data-anim-type="fade-in-up">

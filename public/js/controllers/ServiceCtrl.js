@@ -1,10 +1,23 @@
-angular.module('ServiceCtrl', []).controller('ServiceController', function ($scope, Service, Category, Appointment, $uibModal, $log) {
+angular.module('ServiceCtrl', []).controller('ServiceController', function ($scope, Service, Category, $uibModal, $sessionStorage) {
 
     $scope.tagline = 'These are the Services!';
 
     $scope.services = [];
 
-    $scope.Cart = Appointment.localCart();
+    $scope.$storage = $sessionStorage.$default({
+        Cart: []
+    });
+
+    $scope.EmptyCart = function(){
+        //Present Confirmation Dialog to empty cart
+        var result =  window.confirm("Are you sure you want to empty your cart?");
+        if(result){
+            delete $scope.$storage.Cart;
+        }
+        else {
+            //do nothing
+        }
+    };
 
     $scope.getCategories = function () {
         Category.get()
@@ -74,28 +87,16 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
 
     $scope.AddToCart = function (serviceID) {
         //If service is not already in the Cart, then add.
-        //console.log("Cart Before: ", $scope.Cart);
-        //console.log("Index of val=serviceID: "+serviceID+" = ", $scope.Cart.indexOf(serviceID));
+        //console.log("Cart Before: ", $scope.$storage.Cart);
+        //console.log("Index of val=serviceID: "+serviceID+" = ", $scope.$storage.Cart.indexOf(serviceID));
 
-        if($scope.Cart.indexOf(serviceID) < 0){
-            $scope.Cart.push(serviceID);
+        if($scope.$storage.Cart.indexOf(serviceID) < 0){
+            $scope.$storage.Cart.push(serviceID);
         }
         else {
             window.alert("This item is already in the cart.")
         }
-        //console.log("Cart After: ", $scope.Cart);
-    };
-
-    $scope.EmptyCart = function(){
-        //Present Confirmation Dialog to empty cart
-        var result = false;
-        result = window.confirm("Are you sure you want to empty your cart?");
-        if(result){
-            $scope.Cart = Appointment.emptyCart();
-        }
-        else {
-            //do nothing
-        }
+        //console.log("Cart After: ", $scope.$storage.Cart);
     };
 
     $scope.openNewServiceModal = function () {
@@ -227,17 +228,19 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
                 // this callback will be called asynchronously
                 // when the response is available
                 $scope.results = "Success";
+                $scope.type = "success";
                 $scope.response = response;
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
                 $scope.results = "Failure";
+                $scope.type = "warning";
                 $scope.response = response;
             });
 
         //console.log("Results: ", $scope.results);
 
-        setTimeout(function(){
+        $timeout(function(){
             $scope.stage = 2; // Show results
         }, 1000);
     };

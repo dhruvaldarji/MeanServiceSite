@@ -84,7 +84,10 @@ module.exports = function (app) {
         .put(appointments.update)
         .delete(appointments.delete);
 
-    app.param('apptID', appointments.apptByCategory);
+    app.route('/api/appointments/client/:client/')
+        .get(appointments.apptByClient);
+
+    app.param('apptID', appointments.apptByID);
 
     //==========================================================================
 

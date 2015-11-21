@@ -5,11 +5,11 @@ var Schema = mongoose.Schema;
 
 var AppointmentSchema = new Schema({
 	"id" : { type : Schema.ObjectId, default : Schema.ObjectId	},
-	"name" : {type : String, default: 'Service_Name', required: true	},
-	"category" : {type : String, default: 'Service_Category', required: true	},
-	"price": {type: Number, min: 0, default: 10.00, required: true	},
-	"description": {type: String, default: 'Service_Description', required: true	},
-	"duration": {type: Number, min: 0, default: 1.00, required: false	}
+	"client" : {type : String, required: true	},
+	"serviceID" : {type: String, required: true	},
+	"date" : {type: Date, default: Date.now(), required: true	},
+	"comments": {type: String	}
+
 });
 
 // define our services model

@@ -1,11 +1,14 @@
 angular.module('AppointmentService', []).factory('Appointment', ['$http', function($http) {
 
-    var cart = [];
-
     return {
         // call to get all Categories
         get : function() {
             return $http.get('/api/appointments');
+        },
+
+        // call to get all Categories
+        getByClient : function(client) {
+            return $http.get('/api/appointments/client/' + client);
         },
 
         // call to get Service by id.
@@ -25,17 +28,6 @@ angular.module('AppointmentService', []).factory('Appointment', ['$http', functi
         // call to DELETE a Appointment
         delete : function(id) {
             return $http.delete('/api/appointments/:' + id);
-        },
-
-        //call to get instance of cart.
-        localCart : function(){
-            return cart;
-        },
-
-        //call to empty cart
-        emptyCart : function(){
-            cart = [];
-            return cart;
         }
     }
 

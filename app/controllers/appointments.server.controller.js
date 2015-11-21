@@ -14,7 +14,7 @@ var getErrorMessage = function (err) {
 // GET SERVICES
 exports.list = function (req, res) {
     // use mongoose to get all appts in the database
-    Appointment.find().sort('category').exec(function (err, appts) {
+    Appointment.find().sort('date').exec(function (err, appts) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -27,11 +27,10 @@ exports.list = function (req, res) {
 // CREATE Appointment
 exports.create = function (req, res) {
     var appt = new Appointment();
-    appt.name = req.body.name;
-    appt.category = req.body.category;
-    appt.price = req.body.price;
-    appt.description = req.body.description;
-    appt.duration = req.body.duration;
+    appt.client = req.body.client;
+    appt.serviceID = req.body.serviceID;
+    appt.date = req.body.date;
+    appt.comments = req.body.comments;
 
     // save the appt and check for errors
     appt.save(function (err) {
@@ -52,17 +51,17 @@ exports.create = function (req, res) {
 exports.apptByID = function (req, res, next, id) {
     Appointment.findById(id).exec(function (err, appt) {
         if (err) return next(err);
-        if (!appt) return next(new Error('Failed to load Appointment with ID:s ' + id));
+        if (!appt) return next(new Error('Failed to load Appointment with ID: ' + id));
 
         req.appt = appt;
         next();
     });
 };
 
-exports.apptByCategory = function (req, res) {
-    var id = req.params.ID;
+exports.apptByClient = function (req, res) {
+    var clientName = req.params.client;
     // use mongoose to get all appts in the database
-    Appointment.find({'category': id }).sort('name').exec(function (err, appts) {
+    Appointment.find({'client': clientName }).sort('client').exec(function (err, appts) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
@@ -82,11 +81,10 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
     var appt = req.appt;
 
-    appt.name = req.body.name;
-    appt.category = req.body.category;
-    appt.price = req.body.price;
-    appt.description = req.body.description;
-    appt.duration = req.body.duration;
+    appt.client = req.body.client;
+    appt.serviceID = req.body.serviceID;
+    appt.date = req.body.date;
+    appt.comments = req.body.comments;
 
     appt.save(function (err) {
         if (err) {

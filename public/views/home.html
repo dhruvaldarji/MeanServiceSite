@@ -3,7 +3,7 @@
         <div class="text-center">
             <h1 id="WelcomeHeader">Welcome to {{site_data.title}}</h1>
 
-            <h3 id="OwnerHeader" >By {{site_data.owner}}</h3>
+            <h3 id="OwnerHeader">By {{site_data.owner}}</h3>
 
             <br>
 
@@ -19,7 +19,7 @@
                 <!--Short Description-->
                 <div class="col-md-4 col-sm-12 col-xs-12" ng-if="site_data.short_descriptions">
 
-                    <uib-carousel interval="carouselInterval" >
+                    <uib-carousel interval="carouselInterval">
                         <uib-slide ng-repeat="desc in site_data.short_descriptions" active="slide.active">
                             <div class="carousel-content">
                                 <p>{{desc}}</p>
@@ -45,7 +45,8 @@
                 <p>Follow me on Social Media!</p>
 
                 <div class="btn-group">
-                    <a type="button" ng-show="site_data.social.youtube" ng-href="http://www.youtube.com/{{site_data.social.youtube}}/"
+                    <a type="button" ng-show="site_data.social.youtube"
+                       ng-href="http://www.youtube.com/{{site_data.social.youtube}}/"
                        class="btn btn-sm btn-primary" target="_blank"><i
                             class="fa fa-youtube-play"></i></a>
                     <a type="button" ng-show="site_data.social.instagram"
@@ -56,26 +57,26 @@
                        ng-href="http://www.pinterest.com/{{site_data.social.pinterest}}/" class="btn btn-sm btn-primary"
                        target="_blank"><i
                             class="fa fa-pinterest"></i></a>
-                    <a type="button" ng-show="site_data.social.twitter" ng-href="http://www.twitter.com/{{site_data.social.twitter}}/"
+                    <a type="button" ng-show="site_data.social.twitter"
+                       ng-href="http://www.twitter.com/{{site_data.social.twitter}}/"
                        class="btn btn-sm btn-primary" target="_blank"><i
                             class="fa fa-twitter "></i></a>
                 </div>
                 <br><br>
-                <a ng-href="https://twitter.com/share" class="twitter-share-button">Share</a> |
-
                 <a ng-href="https://twitter.com/{{site_data.social.twitter}}" class="twitter-follow-button"
-                   data-show-count="false">
-                    Follow @{{site_data.social.twitter}}</a> |
+                   data-show-count="false">Follow @{{site_data.social.twitter}}</a>
 
                 <a ng-href="https://twitter.com/intent/tweet?button_hashtag=#{{site_data.title}}"
-                   class="twitter-hashtag-button">Tweet
-                    #{{site_data.title}}</a> |
+                   class="twitter-hashtag-button">Tweet #{{site_data.title}}</a>
 
-                <a ng-href="https://twitter.com/intent/tweet?screen_name={{site_data.social.twitter}}" class="twitter-mention-button">
+                <a ng-href="https://twitter.com/intent/tweet?screen_name={{site_data.social.twitter}}"
+                   class="twitter-mention-button">
                     Tweet to @{{site_data.social.twitter}}</a>
+
                 <br><br>
+
                 <a type="button" ng-href="/about" class=" btn btn-primary">Who is {{site_data.owner}} Really?</a>
-                <br><br>
+
                 <br><br>
             </div>
             <!-- //.page-scroll -->
