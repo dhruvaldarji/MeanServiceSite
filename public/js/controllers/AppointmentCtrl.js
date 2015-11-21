@@ -66,6 +66,9 @@ angular.module('AppointmentCtrl', []).controller('AppointmentController', functi
             resolve: {
                 newAppointment: function () {
                     return $scope.newAppointment;
+                },
+                cartIndex: function(){
+                    return index;
                 }
             }
         });
@@ -74,11 +77,7 @@ angular.module('AppointmentCtrl', []).controller('AppointmentController', functi
             $scope.newAppointment = newAppointment;
         }, function () {
             //$log.info('Create Modal dismissed at: ' + new Date());
-            if ($scope.results = "Success") {
-                $scope.appointments.splice(index, 1);
-                $scope.$storage.Cart.splice(index, 1);
-            }
-            $scope.results = "";
+            LoadFromCart();
         });
     };
 
@@ -96,9 +95,13 @@ angular.module('AppointmentCtrl', []).controller('AppointmentController', functi
 
 });
 
-angular.module('AppointmentCtrl').controller('ScheduleAppointmentCtrl', function ($scope, $uibModalInstance, $timeout, Appointment, newAppointment) {
+angular.module('AppointmentCtrl').controller('ScheduleAppointmentCtrl', function ($scope, $uibModalInstance, $timeout, Appointment, newAppointment, $sessionStorage, cartIndex) {
 
-    console.log("Modal open");
+    $scope.$storage = $sessionStorage.$default({
+        Cart: []
+    });
+
+    $scope.results = "";
 
     $scope.stage = 0; // Entering information
 
@@ -114,8 +117,7 @@ angular.module('AppointmentCtrl').controller('ScheduleAppointmentCtrl', function
                 $scope.results = "Success";
                 $scope.type = "success";
                 $scope.response = response;
-
-
+                $scope.$storage.Cart.splice(cartIndex, 1);
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
