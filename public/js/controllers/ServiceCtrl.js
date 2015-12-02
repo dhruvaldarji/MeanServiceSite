@@ -190,14 +190,15 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
 
 });
 
-angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, $uibModalInstance, $timeout, Category, Service) {
+angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, $uibModalInstance, $timeout, Category, Service, Upload) {
 
     $scope.newService = {
         name: null,
         category: null,
         price: null,
         description: null,
-        duration: null
+        duration: null,
+        image: null
     };
 
     Category.get()
@@ -223,6 +224,7 @@ angular.module('ServiceCtrl').controller('CreateServiceCtrl', function ($scope, 
 
     $scope.submitService = function () {
         $scope.stage = 1; // Processing
+        console.log("Creating Service: ", $scope.newService);
         Service.create($scope.newService)
             .then(function successCallback(response) {
                 // this callback will be called asynchronously
@@ -272,6 +274,7 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
 
             $timeout(function(){
                 $scope.stage = 2; // Show results
+                console.log($scope.currentService);
             }, 1000);
 
         }, function errorCallback(response) {
@@ -285,7 +288,8 @@ angular.module('ServiceCtrl').controller('DisplayServiceCtrl', function ($scope,
                 category: null,
                 price: null,
                 description: null,
-                duration: null
+                duration: null,
+                image: null
             };
 
             $timeout(function(){
@@ -325,7 +329,8 @@ angular.module('ServiceCtrl').controller('EditServiceCtrl', function ($scope, $u
                 category: null,
                 price: null,
                 description: null,
-                duration: null
+                duration: null,
+                image: null
             };
 
             $scope.stage = 0; // Display Results
@@ -419,7 +424,8 @@ angular.module('ServiceCtrl').controller('DeleteServiceCtrl', function ($scope, 
                 category: null,
                 price: null,
                 description: null,
-                duration: null
+                duration: null,
+                image: null
             };
             $scope.stage = 0; // Display Results
         });

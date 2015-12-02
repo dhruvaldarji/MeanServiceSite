@@ -9,7 +9,8 @@ var ServiceSchema = new Schema({
 	"category" : {type : String, default: 'Service_Category', required: true	},
 	"price": {type: Number, min: 0, default: 10.00, required: true	},
 	"description": {type: String, default: 'Service_Description', required: true	},
-	"duration": {type: Number, min: 0, default: 1.00, required: false	}
+	"duration": {type: Number, min: 0, default: 1.00, required: false	},
+	"image": {  data: Buffer, contentType: String, required: false	}
 });
 
 // define our services model

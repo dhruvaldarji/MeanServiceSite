@@ -2,6 +2,7 @@ angular.module('app',
     ['ui.bootstrap',
         'ngRoute',
         'appRoutes',
+        'appDirectives',
         'MainCtrl',
         'UserCtrl',
         'UserService',
@@ -14,7 +15,8 @@ angular.module('app',
         'AboutCtrl',
         'AboutService',
         'ng-mfb',
-        'ngStorage'
+        'ngStorage',
+        'ngFileUpload'
     ]);
 
 //Non-Angular JS

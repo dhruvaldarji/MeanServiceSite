@@ -32,6 +32,7 @@ exports.create = function (req, res) {
     service.price = req.body.price;
     service.description = req.body.description;
     service.duration = req.body.duration;
+    service.image = req.body.image;
 
     // save the service and check for errors
     service.save(function (err) {
@@ -87,6 +88,7 @@ exports.update = function (req, res) {
     service.price = req.body.price;
     service.description = req.body.description;
     service.duration = req.body.duration;
+    service.image = req.body.image;
 
     service.save(function (err) {
         if (err) {

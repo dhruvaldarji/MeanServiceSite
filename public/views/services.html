@@ -105,28 +105,38 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage === 0">
             <div class="row form-group">
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="newServiceName">Service Name: </label>
-                    <input id="newServiceName" type="text" ng-model="newService.name"/><br/>
+                    <input class="form-control" id="newServiceName" type="text" ng-model="newService.name"/><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="newServiceCategory">Service Category: </label>
-                    <!--<input id="newServiceCategory" type="text" ng-model="newService.category"/>-->
-                    <select name="categorySelect" id="newServiceCategory" ng-model="newService.category"
+                    <!--<input class="form-control" id="newServiceCategory" type="text" ng-model="newService.category"/>-->
+                    <select class="form-control"name="categorySelect" id="newServiceCategory" ng-model="newService.category"
                             ng-options="category.name for category in categories track by category._id">
                     </select><br>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="newServicePrice">Service Price: </label>
-                    <input id="newServicePrice" type="number" ng-model="newService.price"/><br/>
+                    <input class="form-control" id="newServicePrice" type="number" ng-model="newService.price"/><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="newServiceDescription">Service Description: </label>
-                    <input id="newServiceDescription" type="text" ng-model="newService.description"/><br/>
+                    <input class="form-control" id="newServiceDescription" type="text" ng-model="newService.description"/><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="newServiceDuration">Service Duration: </label>
-                    <input id="newServiceDuration" type="number" ng-model="newService.duration"/><br/>
+                    <input class="form-control" id="newServiceDuration" type="number" ng-model="newService.duration"/><br/>
+                </div>
+                <div class="col">
+                    <label for="newServiceImage">Service Image: </label>
+                    <div id="newServiceImage" class="form-control btn btn-primary" ngf-select="print($file)"
+                         ng-model="newService.image" name="file" ngf-pattern="'image/*'"
+                         accept="image/*" ngf-max-size="20MB" ngf-min-height="250">Select Image
+                    </div>
+                    <div ng-show="newService.image">
+                        <hr/><img class="img-responsive" ngf-thumbnail="newService.image">
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,30 +178,36 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage == 2">
             <div class="row form-group">
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="currentServiceName">Service Name: </label>
 
                     <p id="currentServiceName" ng-bind="currentService.name"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="currentServiceCategory">Service Category: </label>
 
                     <p id="currentServiceCategory" ng-bind="currentService.category"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="currentServicePrice">Service Price: </label>
 
                     <p id="currentServicePrice" ng-bind="currentService.price"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="currentServiceDescription">Service Description: </label>
 
                     <p id="currentServiceDescription" ng-bind="currentService.description"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="currentServiceDuration">Service Duration: </label>
 
                     <p id="currentServiceDuration" ng-bind="currentService.duration"></p><br/>
+                </div>
+                <div class="col">
+                    <label for="currentServiceImage">Service Image: </label>
+                    <div id="currentServiceImage" ng-show="currentService.image">
+                        <hr/><img class="img-responsive" ngf-thumbnail="currentService.image">
+                    </div>
                 </div>
             </div>
         </div>
@@ -208,28 +224,38 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage == 0">
             <div class="row form-group">
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="editServiceName">Service Name: </label>
-                    <input id="editServiceName" type="text" ng-model="editService.name"/><br/>
+                    <input class="form-control" id="editServiceName" type="text" ng-model="editService.name"/><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="editServiceCategory">Service Category: </label>
-                    <!--<input id="editServiceCategory" type="text" ng-model="editService.category"/>-->
-                    <select name="categorySelect" id="editServiceCategory" ng-model="editService.category"
+                    <!--<input class="form-control" id="editServiceCategory" type="text" ng-model="editService.category"/>-->
+                    <select class="form-control" name="categorySelect" id="editServiceCategory" ng-model="editService.category"
                             ng-options="category.name for category in categories track by category._id">
                     </select><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="editServicePrice">Service Price: </label>
-                    <input id="editServicePrice" type="number" ng-model="editService.price"/><br/>
+                    <input class="form-control" id="editServicePrice" type="number" ng-model="editService.price"/><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="editServiceDescription">Service Description: </label>
-                    <input id="editServiceDescription" type="text" ng-model="editService.description"/><br/>
+                    <input class="form-control" id="editServiceDescription" type="text" ng-model="editService.description"/><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="editServiceDuration">Service Duration: </label>
-                    <input id="editServiceDuration" type="number" ng-model="editService.duration"/><br/>
+                    <input class="form-control" id="editServiceDuration" type="number" ng-model="editService.duration"/><br/>
+                </div>
+                <div class="col">
+                    <label for="editServiceImage">Service Image: </label>
+                    <div id="editServiceImage" class="form-control btn btn-primary" ngf-select="print($file)"
+                         ng-model="editService.image" name="file" ngf-pattern="'image/*'"
+                         accept="image/*" ngf-max-size="20MB" ngf-min-height="250">Select Image
+                    </div>
+                    <div ng-show="editService.image">
+                        <hr/><img class="img-responsive" ngf-thumbnail="editService.image">
+                    </div>
                 </div>
             </div>
         </div>
@@ -260,32 +286,38 @@
         </div>
         <div class="modal-body modal-color" ng-show="stage == 0">
             <div class="row form-group">
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="deleteServiceName">Service Name: </label>
 
                     <p id="deleteServiceName" ng-bind="deleteService.name"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="deleteServiceCategory">Service Category: </label>
 
                     <p id="deleteServiceCategory" ng-bind="deleteService.category"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="deleteServicePrice">Service Price: </label>
 
                     <p id="deleteServicePrice" ng-bind="deleteService.price"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="deleteServiceDescription">Service Description: </label>
 
                     <p id="deleteServiceDescription" ng-bind="deleteService.description"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
                     <label for="deleteServiceDuration">Service Duration: </label>
 
                     <p id="deleteServiceDuration" ng-bind="deleteService.duration"></p><br/>
                 </div>
-                <div class="col col-md-offset-1 col-md-4">
+                <div class="col">
+                    <label for="deleteServiceImage">Service Image: </label>
+                    <div id="deleteServiceImage" ng-show="deleteService.image">
+                        <hr/><img class="img-responsive" ngf-thumbnail="deleteService.image">
+                    </div>
+                </div>
+                <div class="col">
                     <p>Are you sure you want to delete?</p>
                 </div>
 
