@@ -14,6 +14,7 @@ angular.module('app',
         'AppointmentService',
         'AboutCtrl',
         'AboutService',
+        'AdminCtrl',
         'ng-mfb',
         'ngStorage',
         'ngFileUpload'

@@ -1,8 +1,17 @@
-angular.module('MainCtrl', []).controller('MainController', function ($scope, About, $location) {
+angular.module('MainCtrl', []).controller('MainController', function ($scope, About, $location, $sessionStorage) {
 
     $scope.site_data = {};
 
-    $scope.admin = false;
+    $scope.$storage = $sessionStorage.$default({
+        admin: false
+    });
+
+    $scope.admin = $scope.$storage.admin;
+
+    $scope.auth = function(){
+        $scope.$storage.admin = !$scope.$storage.admin;
+        $scope.admin = $scope.$storage.admin;
+    };
 
     About.get().then(function (data) {
         $scope.site_data = data.data[0];

@@ -6,7 +6,7 @@ angular.module('AppointmentService', []).factory('Appointment', ['$http', functi
             return $http.get('/api/appointments');
         },
 
-        // call to get all Categories
+        // call to get all Appointment by client
         getByClient : function(client) {
             return $http.get('/api/appointments/client/' + client);
         },

@@ -5,7 +5,7 @@ angular.module('ServiceCtrl', []).controller('ServiceController', function ($sco
     $scope.services = [];
 
     $scope.$storage = $sessionStorage.$default({
-        Cart: []
+        Cart: [],
     });
 
     $scope.EmptyCart = function(){

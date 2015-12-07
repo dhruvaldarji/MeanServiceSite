@@ -1,4 +1,4 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider, $sessionStorage) {
 
     $routeProvider
 
@@ -26,6 +26,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/about', {
             templateUrl: 'views/about.html',
             controller: 'AboutController'
+        })
+        .when('/admin', {
+            templateUrl: 'views/adminPage.html',
+            controller: 'AdminCtrl'
         })
         .otherwise({redirectTo: '/'});
 
