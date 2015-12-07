@@ -38,5 +38,7 @@ To get started complete the following steps.
   * Your Protractor test will send requests to this server to control a local browser.
   * Leave this server running throughout the tutorial.
   * You can see information about the status of the server at `http://localhost:4444/wd/hub`.
+  
+4. Run Tests entering into the console: `protractor tests/conf.js`
 
 For More information reference Protractor [here](https://angular.github.io/protractor/#/).
