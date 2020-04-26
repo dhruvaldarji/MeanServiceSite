@@ -1,0 +1,28 @@
+{
+  "name": "MeanServiceSite",
+  "homepage": "https://github.com/dhruvaldarji/meanservicesite",
+  "author": "Dhruval Darji",
+  "description": "MEAN Application for Service oriented Businesses.",
+  "version": "1.0.0",
+  "license": "Apache-2",
+  "ignore": [
+	"**/.*",
+	".idea",
+	"node_modules",
+	"bower_components",
+	"./lib/.bower_components",
+	"test",
+	"tests"
+  ],
+  "dependencies": {
+	"bootstrap": "latest",
+	"angular": "latest",
+	"angular-route": "latest",
+    "angular-bootstrap":"latest",
+    "jquery":"latest",
+    "font-awesome": "latest",
+    "animate.css": "latest"
+  }
+}
+
+
